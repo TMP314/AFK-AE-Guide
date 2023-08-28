@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AFK AE Tool</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+        
+    </head>
+
+    <body>
+        <div class="header">
+            <div>AFK Arena Abyssal Expedition Tool</div>
+        </div>
+
+        <div class="main">
+            <div class="sub-header">Input your teams, then generate the guide</div>
+            <div class="team-container">
+                <div class="grid-header">
+                    Team 1
+                </div>
+                <div class="grid-container">
+                    <div class="item-a">Hero 1</div>
+                    <div class="item-b">Hero 2</div>
+                    <div class="item-c">Hero 3</div>
+                    <div class="item-d">Hero 4</div>
+                    <div class="item-e">Hero 5</div>
+                    <div class="item-f">Beast 1</div>
+                </div>
+                <div class="grid-container">
+                    <div id="h00" class="item-a hero"></div>
+                    <div id="h01" class="item-b hero"></div>
+                    <div id="h02" class="item-c hero"></div>
+                    <div id="h03" class="item-d hero"></div>
+                    <div id="h04" class="item-e hero"></div>
+                    <div id="b00" class="item-f beast"></div>
+                </div>
+            </div>
+            <div class="team-container">
+                <div class="grid-header">
+                    Team 2
+                </div>
+                <div class="grid-container">
+                    <div class="item-a">Hero 1</div>
+                    <div class="item-b">Hero 2</div>
+                    <div class="item-c">Hero 3</div>
+                    <div class="item-d">Hero 4</div>
+                    <div class="item-e">Hero 5</div>
+                    <div class="item-f">Beast 1</div>
+                </div>
+                <div class="grid-container">
+                    <div id="h10" class="item-a hero"></div>
+                    <div id="h11" class="item-b hero"></div>
+                    <div id="h12" class="item-c hero"></div>
+                    <div id="h13" class="item-d hero"></div>
+                    <div id="h14" class="item-e hero"></div>
+                    <div id="b10" class="item-f beast"></div>
+                </div>
+            </div>
+            <div class="team-container">
+                <div class="grid-header">
+                    Team 3
+                </div>
+                <div class="grid-container">
+                    <div class="item-a">Hero 1</div>
+                    <div class="item-b">Hero 2</div>
+                    <div class="item-c">Hero 3</div>
+                    <div class="item-d">Hero 4</div>
+                    <div class="item-e">Hero 5</div>
+                    <div class="item-f">Beast 1</div>
+                </div>
+                <div class="grid-container">
+                    <div id="h20" class="item-a hero"></div>
+                    <div id="h21" class="item-b hero"></div>
+                    <div id="h22" class="item-c hero"></div>
+                    <div id="h23" class="item-d hero"></div>
+                    <div id="h24" class="item-e hero"></div>
+                    <div id="b20" class="item-f beast"></div>
+                </div>
+            </div>
+            <div class="team-container">
+                <div class="grid-header">
+                    Team 4
+                </div>
+                <div class="grid-container">
+                    <div class="item-a">Hero 1</div>
+                    <div class="item-b">Hero 2</div>
+                    <div class="item-c">Hero 3</div>
+                    <div class="item-d">Hero 4</div>
+                    <div class="item-e">Hero 5</div>
+                    <div class="item-f">Beast 1</div>
+                </div>
+                <div class="grid-container">
+                    <div id="h30" class="item-a hero"></div>
+                    <div id="h31" class="item-b hero"></div>
+                    <div id="h32" class="item-c hero"></div>
+                    <div id="h33" class="item-d hero"></div>
+                    <div id="h34" class="item-e hero"></div>
+                    <div id="b30" class="item-f beast"></div>
+                </div>
+            </div>
+            <div class="team-container">
+                <div class="grid-header">
+                    Team 5
+                </div>
+                <div class="grid-container">
+                    <div class="item-a">Hero 1</div>
+                    <div class="item-b">Hero 2</div>
+                    <div class="item-c">Hero 3</div>
+                    <div class="item-d">Hero 4</div>
+                    <div class="item-e">Hero 5</div>
+                    <div class="item-f">Beast 1</div>
+                </div>
+                <div class="grid-container">
+                    <div id="h40" class="item-a hero"></div>
+                    <div id="h41" class="item-b hero"></div>
+                    <div id="h42" class="item-c hero"></div>
+                    <div id="h43" class="item-d hero"></div>
+                    <div id="h44" class="item-e hero"></div>
+                    <div id="b40" class="item-f beast"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="generate-container">
+                <div class="grid-container-h1">
+                    <div># Farm Heroes: </div>
+                    <label class="form-control">
+                        <div class="number-label"> 5 </div>
+                        <input type="radio" name="radio" id="5h" class="radio" checked="checked">
+                    </label>
+                    <label class="form-control">
+                        <div class="number-label"> 8 </div>
+                        <input type="radio" name="radio" id="8h" class="radio">
+                    </label>
+                    <label class="form-control">
+                        <div class="number-label"> 10 </div>
+                        <input type="radio" name="radio" id="10h" class="radio">
+                    </label>
+                </div>
+            </label>
+            <div class="grid-container-h2">
+                <div id="load-afk-info" class="button">
+                    <div class="center-text" onclick="showElement('#popup', 'grid')">Load Heroes and Beasts</div>
+                </div>
+                <div id="generate" class="button">
+                    <div class="center-text">Generate</div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="footer">
+            Version: 0.1a
+        </div>
+
+        <div id="popup" class="popup">
+            <div class="popup-elements">Heroes</div>
+            <textarea id="hero-copy" class="textarea-popup">Copy the CharacterGrid_CharacterGrid class element here</textarea>
+            <div class="popup-elements">Beasts</div>
+            <textarea id="beast-copy" class="textarea-popup">Copy the PetGrid_PetGRid class element here</textarea>
+            <div id="load-data" class="button" onclick="loadHeroesAndBeasts()">
+                <div class="center-text">Load Data</div>
+            </div>
+            <div class="close" onclick="hideElement('#popup')"></div>
+        </div>
+
+        <div id="popup-hero" class="popup-hero">
+            <div class="popup-header">Select Hero</div>
+            <div class="clear" onclick="clearHero()">Clear</div>
+            <div class="close" onclick="hideElement('#popup-hero')"></div>
+            <div id="popup-hero-grid" class="popup-grid"></div>
+            
+        </div>
+
+        <div id="popup-beast" class="popup-hero">
+            <div class="popup-header">Select Beast</div>
+            <div class="clear" onclick="clearBeast()">Clear</div>
+            <div class="close" onclick="hideElement('#popup-beast')"></div>
+            <div id="popup-beast-grid" class="popup-grid"></div>
+        </div>
+
+    </body>
+    <script src="./js/scripts.js"></script>
+</html>
