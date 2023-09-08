@@ -7,6 +7,7 @@ var beastsMapping = {
 };
 var heroes = {}
 var beasts = {}
+var team = {}
 
 var loadedHeroes = false;
 var loadedBeasts = false;
@@ -28,7 +29,8 @@ function onStartup() {
             openSelectMenu(this.id);
         });
     });
-    //Apply to the Load Heroes and Beasts and Generate Buttons On Click Events
+    //Load data if it exists
+    loadState();
 }
 
 function isValidTeam(teamNumber) {
@@ -51,8 +53,9 @@ function isValidTeam(teamNumber) {
 
 function openSelectMenu(id) {
     var type = id.substring(0,1)
+    var isFarmBeast = (id.substring(1,2) == "b")
     selectedHeroeBeastDivId = id;
-    if (type == "h") {
+    if (type == "h" || (type == "f" && !isFarmBeast)) {
         if (loadedHeroes) {
             showElement('#popup-hero','block')
             if (!addedHeroes) {
@@ -64,9 +67,10 @@ function openSelectMenu(id) {
             window.alert("Please load your heroes so that you can select one.")
         }
     }
-    if (type == "b") {
+    if (type == "b" || isFarmBeast) {
         if (loadedBeasts) {
             showElement('#popup-beast','block')
+
             if (!addedBeasts) {
                 addBeastsToElement();
                 addedBeasts = true;
@@ -92,13 +96,22 @@ function addHeroesToElement() {
 }
 
 function addHeroToTeamSlot(teamSlot, heroId) {
-    console.log("Adding hero id: " + heroId + " to the slot: " + teamSlot)
+    // console.log("Adding hero id: " + heroId + " to the slot: " + teamSlot)
+    var type = teamSlot.substr(0,1);
     $("#" + teamSlot).css('background-image','url(' + heroes[heroId] + ')');
     $("#" + teamSlot).removeClass("hero");
     $("#" + teamSlot).addClass("selectable-hero");
     $("#" + teamSlot).attr("hero-beast-id", heroId);
     hideElement('#popup-hero');
     removeHeroBeastFromSelection(heroId);
+    team[teamSlot] = heroId;
+    // if (type != "f") {
+    //     showTeamHeroesBeastsInFarmSelection()
+    // }
+    // else if (type == "f") {
+    //     showTeamHeroesBeastsInTeamSelection()
+    // }
+    saveCurrentState("team");
 }
 
 function clearHero() {
@@ -108,7 +121,41 @@ function clearHero() {
     $("#" + selectedHeroeBeastDivId).attr("hero-code", null);
     hideElement("#popup-hero");
     addHeroBeastToSelection( $("#" + selectedHeroeBeastDivId).attr("hero-beast-id"));
+    delete team[selectedHeroeBeastDivId];
+    saveCurrentState("team");
 }
+
+// function showTeamHeroesBeastsInFarmSelection() {
+//     for (i in team) {
+//         if (i.substr(0,1) == "f") {
+//             $('#' + team[i]).css('display','block')
+//         }
+//     }
+// }
+
+// function hideTeamHeroesBeastsInFarmSelection() {
+//     for (i in team) {
+//         if (i.substr(0,1) != "f") {
+//             $('#' + team[i]).css('display','none')
+//         }
+//     }
+// }
+
+// function showTeamHeroesBeastsInTeamSelection() {
+//     for (i in team) {
+//         if (i.substr(0,1) != "f") {
+//             $('#' + team[i]).css('display','block')
+//         }
+//     }
+// }
+
+// function hideTeamHeroesBeastsInTeamSelection() {
+//     for (i in team) {
+//         if (i.substr(0,1) == "f") {
+//             $('#' + team[i]).css('display','none')
+//         }
+//     }
+// }
 
 function addHeroBeastToSelection(divId) {
     $("#" + divId).css('display','block');
@@ -132,25 +179,70 @@ function addBeastsToElement() {
 }
 
 function addBeastToTeamSlot(teamSlot, beastId) {
-    console.log("Adding beast id: " + beastId + " to the slot: " + teamSlot)
+    // console.log("Adding beast id: " + beastId + " to the slot: " + teamSlot)
     $("#" + teamSlot).css('background-image','url(' + beasts[beastId] + ')');
     $("#" + teamSlot).removeClass("beast");
     $("#" + teamSlot).addClass("selectable-beast");
     $("#" + teamSlot).attr("hero-beast-id", beastId);
     hideElement('#popup-beast');
     removeHeroBeastFromSelection(beastId);
+    team[teamSlot] = beastId;
+    saveCurrentState("team");
 }
 
 function clearBeast() {
     $("#" + selectedHeroeBeastDivId).css("background-image", "");
     $("#" + selectedHeroeBeastDivId).addClass("beast");
     $("#" + selectedHeroeBeastDivId).removeClass("selectable-beast");
-    addHeroBeastToSelection( $("#" + selectedHeroeBeastDivId).attr("hero-beast-id"));
     hideElement("#popup-beast");
+    addHeroBeastToSelection( $("#" + selectedHeroeBeastDivId).attr("hero-beast-id"));
+    delete team[selectedHeroeBeastDivId];
+    saveCurrentState("team");
 }
 
-function removeBeastFromSelection(id) {
+function clearTeams() {
+    // console.log("Clearing teams")
+    var team_number = 0;
+    var hero_number = 0;
 
+    while (team_number < 5) {
+        while (hero_number < 5) {
+            selectedHeroeBeastDivId = "h" + team_number + hero_number;
+            if ($("#" + selectedHeroeBeastDivId).hasClass("selectable-hero")) {
+                // console.log("Removing: " + selectedHeroeBeastDivId)
+                clearHero()
+            }
+            hero_number++;
+        }
+        selectedHeroeBeastDivId = "b" + team_number + "0";
+        if ($("#" + selectedHeroeBeastDivId).hasClass("selectable-beast")) {
+            clearBeast()
+        }
+        hero_number = 0;
+        team_number++;
+    }
+    team_number = 0;
+    hero_number = 0;
+    while (team_number < 2) {
+        while (hero_number < 5) {
+            selectedHeroeBeastDivId = "f" + team_number + hero_number;
+            if ($("#" + selectedHeroeBeastDivId).hasClass("selectable-hero")) {
+                console.log("Removing: " + selectedHeroeBeastDivId)
+                clearHero()
+            }
+            hero_number++;
+        }
+        selectedHeroeBeastDivId = "fb" + team_number;
+        console.log("Removing: " + selectedHeroeBeastDivId)
+        if ($("#" + selectedHeroeBeastDivId).hasClass("selectable-beast")) {
+            console.log("Removing: " + selectedHeroeBeastDivId)
+            clearBeast()
+        }
+        hero_number = 0;
+        team_number++;
+    }
+
+    saveCurrentState("team");
 }
 
 function showElement(divId, type){
@@ -207,6 +299,7 @@ function loadHeroesAndBeasts(){
             end = link.lastIndexOf(endString, start);
             heroCode = link.substring(end + 2, start).toLowerCase();
             heroes[heroCode] = prefix + link;
+           
         }
         
         count++;
@@ -225,7 +318,7 @@ function loadHeroesAndBeasts(){
         searchString = 'src="';
         endString = 'q=75"';
         start = beastCopy.indexOf(searchString, indexIncrement);
-        console.log("Start: " + start)
+        // console.log("Start: " + start)
 
         if (start == -1) {
             searching = false;
@@ -233,16 +326,16 @@ function loadHeroesAndBeasts(){
 
         if (start != -1) {
             end = beastCopy.indexOf(endString, start)
-            console.log("End: " + end)
+            // console.log("End: " + end)
             indexIncrement = end;
             link = beastCopy.substring(start+5, end+4).replaceAll(replaceString, "");
-            console.log(link);
+            // console.log(link);
             searchString = '%26level'
             endString = 'id%3D'
             start = link.indexOf(searchString);
             end = link.lastIndexOf(endString, start);
             beastCode = link.substring(end + 5, start).toLowerCase();
-            console.log(beastCode)
+            // console.log(beastCode)
             beasts[beastCode] = prefix + link;
         }
         
@@ -255,6 +348,7 @@ function loadHeroesAndBeasts(){
     if (Object.keys(heroes).length > 0) {
         loadedHeroes = true;
         message1 = "Successfully loaded " + Object.keys(heroes).length + " heroes."
+        saveCurrentState("heroes");
     }
     else {
         message1 = "Failed! Unable to load heroes."
@@ -263,6 +357,7 @@ function loadHeroesAndBeasts(){
     if (Object.keys(beasts).length > 0) {
         loadedBeasts = true;
         message2 = "Successfully loaded " + Object.keys(beasts).length + " beasts."
+        saveCurrentState("beasts");
     }
     else {
         message2 = "Failed! Unable to load beasts."
@@ -272,18 +367,60 @@ function loadHeroesAndBeasts(){
     hideElement('#popup');
 }
 
-function saveCurrentState() {
+function saveCurrentState(saveType) {
     //Need to run this after:
     //1. Heroes or Beasts are Loaded
     //2. A Hero is input or cleared
     //3. A Beast is input or cleared
-
+    if (saveType == "heroes") {
+        localStorage.setItem('heroes', JSON.stringify(heroes));
+    }
+    else if (saveType == "beasts") {
+        localStorage.setItem('beasts', JSON.stringify(beasts));
+    }
+    else if (saveType == "team") {
+        localStorage.setItem('team', JSON.stringify(team));
+    } 
 }
 
 function loadState() {
     //Load the saved state
     
+    if (JSON.parse(localStorage.getItem('heroes')) !== null && JSON.parse(localStorage.getItem('beasts')) !== null) {
+        heroes = JSON.parse(localStorage.getItem('heroes'));
+        if (Object.keys(heroes).length > 0) {
+            loadedHeroes = true;
+        }
+        beasts = JSON.parse(localStorage.getItem('beasts'));
+        if (Object.keys(beasts).length > 0) {
+            loadedBeasts = true;
+        }
+        var temp_team = JSON.parse(localStorage.getItem('team'));
+        if (Object.keys(temp_team).length > 0) {
+            for (i in temp_team) {
+                if (i.substring(0,1) == "h"){
+                    addHeroToTeamSlot(i, temp_team[i]);
+                }
+                else if (i.substring(0,1) == "b"){
+                    addBeastToTeamSlot(i, temp_team[i]);
+                }
+                else if (i.substring(0,1) == "f"){
+                    addHeroToTeamSlot(i, temp_team[i]);
+                }
+                else if (i.substring(0,2) == "fb"){
+                    addBeastToTeamSlot(i, temp_team[i]);
+                }
+                
+            }
+        }
+    }  
 }
 
+var getObjectByValue = function (array, key, value) {
+    return array.filter(function (object) {
+        return object[key] === value;
+    });
+};
 
 onStartup();
+

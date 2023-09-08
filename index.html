@@ -4,10 +4,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>AFK AE Tool</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-        
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script> 
+        <script src="./js/init.js"></script>
+        <script src="./usermapping/heroes.js"></script>
+        <script src="./usermapping/beasts.js"></script>
+        <script src="./usermapping/userdata.js"></script>
     </head>
 
     <body>
@@ -125,25 +128,17 @@
         </div>
 
         <div class="generate-container">
-                <div class="grid-container-h1">
-                    <div># Farm Heroes: </div>
-                    <label class="form-control">
-                        <div class="number-label"> 5 </div>
-                        <input type="radio" name="radio" id="5h" class="radio" checked="checked">
-                    </label>
-                    <label class="form-control">
-                        <div class="number-label"> 8 </div>
-                        <input type="radio" name="radio" id="8h" class="radio">
-                    </label>
-                    <label class="form-control">
-                        <div class="number-label"> 10 </div>
-                        <input type="radio" name="radio" id="10h" class="radio">
-                    </label>
-                </div>
-            </label>
+
+
             <div class="grid-container-h2">
-                <div id="load-afk-info" class="button">
-                    <div class="center-text" onclick="showElement('#popup', 'grid')">Load Heroes and Beasts</div>
+                <div id="load-afk-info" class="button" onclick="showElement('#popup', 'grid')">
+                    <div class="center-text">Load Heroes and Beasts</div>
+                </div>
+                <div id="clear" class="button" onclick="clearTeams()">
+                    <div class="center-text">Clear Teams</div>
+                </div>
+                <div id="set-farm-heroes" class="button"  onclick="showElement('#popup-hero-farming', 'block')">
+                    <div class="center-text">Farm Team</div>
                 </div>
                 <div id="generate" class="button">
                     <div class="center-text">Generate</div>
@@ -157,9 +152,9 @@
         </div>
 
         <div id="popup" class="popup">
-            <div class="popup-elements">Heroes</div>
+            <div class="popup-header">Heroes</div>
             <textarea id="hero-copy" class="textarea-popup">Copy the CharacterGrid_CharacterGrid class element here</textarea>
-            <div class="popup-elements">Beasts</div>
+            <div class="popup-header">Beasts</div>
             <textarea id="beast-copy" class="textarea-popup">Copy the PetGrid_PetGRid class element here</textarea>
             <div id="load-data" class="button" onclick="loadHeroesAndBeasts()">
                 <div class="center-text">Load Data</div>
@@ -182,6 +177,30 @@
             <div id="popup-beast-grid" class="popup-grid"></div>
         </div>
 
+        <div id="popup-hero-farming" class="popup-hero">
+            <div class="popup-header">Select Up to 10 Farm Heroes</div>
+            <div class="grid-container">
+                <div id="f00" class="item-a hero"></div>
+                <div id="f01" class="item-b hero"></div>
+                <div id="f02" class="item-c hero"></div>
+                <div id="f03" class="item-d hero"></div>
+                <div id="f04" class="item-e hero"></div>
+                <div id="fb0" class="item-f beast"></div>
+            </div>
+            <div class="grid-container">
+                <div id="f05" class="item-a hero"></div>
+                <div id="f06" class="item-b hero"></div>
+                <div id="f07" class="item-c hero"></div>
+                <div id="f08" class="item-d hero"></div>
+                <div id="f09" class="item-e hero"></div>
+                <div id="fb1" class="item-f beast"></div>
+            </div>
+
+            <div class="close" onclick="hideElement('#popup-hero-farming')"></div>
+            <div id="popup-hero-grid" class="popup-grid"></div>
+            
+        </div>
     </body>
     <script src="./js/scripts.js"></script>
+    <script src="./js/images.js"></script>
 </html>
