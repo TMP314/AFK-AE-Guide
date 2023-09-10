@@ -5,4 +5,6 @@
 05.     COMPLETED:  Add Button to Clear All Farm Heroes - contained in the Set Farm Heroes popup
 06.                 Make it so the farm team hero selection will allow you to select heroes from your teams, and vice versa
 07.                 Program the Generate Guide functionality - handled via popup
+08.                 Include a faction filter for selecting heroes from both team and farm team popup - add a faction class
+                    to the divs, and just display: none them if filtering
 

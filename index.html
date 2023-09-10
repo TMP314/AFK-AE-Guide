@@ -10,7 +10,8 @@
         <script src="./js/init.js"></script>
         <script src="./usermapping/heroes.js"></script>
         <script src="./usermapping/beasts.js"></script>
-        <script src="./usermapping/userdata.js"></script>
+        <!-- <script src="./usermapping/userdata.js"></script> -->
+        
     </head>
 
     <body>
@@ -132,7 +133,7 @@
 
             <div class="grid-container-h2">
                 <div id="load-afk-info" class="button" onclick="showElement('#popup', 'grid')">
-                    <div class="center-text">Load Heroes and Beasts</div>
+                    <div class="center-text">Load AFKCalc Data</div>
                 </div>
                 <div id="clear" class="button" onclick="clearTeams()">
                     <div class="center-text">Clear Teams</div>
@@ -153,12 +154,20 @@
 
         <div id="popup" class="popup">
             <div class="popup-header">Heroes</div>
-            <textarea id="hero-copy" class="textarea-popup">Copy the CharacterGrid_CharacterGrid class element here</textarea>
-            <div class="popup-header">Beasts</div>
-            <textarea id="beast-copy" class="textarea-popup">Copy the PetGrid_PetGRid class element here</textarea>
-            <div id="load-data" class="button" onclick="loadHeroesAndBeasts()">
-                <div class="center-text">Load Data</div>
-            </div>
+            <textarea id="hero-copy" class="textarea-popup">Copy the your AFKCalc JSON Text here, or upload the file</textarea>
+            <!-- <div class="popup-header">Beasts</div> -->
+            <!-- <textarea id="beast-copy" class="textarea-popup">Copy the PetGrid_PetGRid class element here</textarea> -->
+            
+            <div class="grid-container-h2">
+                    <div id="load-data" class="button input-wrapper">
+                       <div class="center-text">Load AFK Data as JSON</div>
+                       <input class="input" type="file" id="myfile" name="myfile">
+                   </div>
+                    
+                <div id="load-data" class="button" onclick="parseJSON()">
+                    <div class="center-text">Load Data</div>
+                </div>
+            </div>         
             <div class="close" onclick="hideElement('#popup')"></div>
         </div>
 
@@ -172,7 +181,7 @@
 
         <div id="popup-beast" class="popup-hero">
             <div class="popup-header">Select Beast</div>
-            <div class="clear" onclick="clearBeast()">Clear</div>
+            <div class="clear" onclick="clearHero()">Clear</div>
             <div class="close" onclick="hideElement('#popup-beast')"></div>
             <div id="popup-beast-grid" class="popup-grid"></div>
         </div>
@@ -201,6 +210,8 @@
             
         </div>
     </body>
-    <script src="./js/scripts.js"></script>
+    <script src="./js/file_manager.js"></script>
+    
     <script src="./js/images.js"></script>
+    <script src="./js/scripts.js"></script>
 </html>

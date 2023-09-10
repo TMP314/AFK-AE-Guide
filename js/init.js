@@ -1,7 +1,8 @@
-var allData ={
+var allData = {
     "heroes": {},
     "beasts": {},
     "team": {},
-    "farm": {},
     "guide": {}
 }
+var loadedHeroes = false;
+var loadedBeasts = false;
