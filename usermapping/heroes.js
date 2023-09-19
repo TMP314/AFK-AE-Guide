@@ -1,0 +1,1432 @@
+var heroesArray = [
+  {
+    "id": 1,
+    "type": "strength",
+    "class": "warrior",
+    "role": "burst",
+    "image": "/heroes/Uhlan.jpg",
+    "slug": "uhlan",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 2,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "aoe",
+    "image": "/heroes/Priest.jpg",
+    "slug": "priest",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 3,
+    "type": "agility",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/nBH.jpg",
+    "slug": "nbh",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 4,
+    "type": "agility",
+    "class": "ranger",
+    "role": "aoe",
+    "image": "/heroes/Mouse.jpg",
+    "slug": "mouse",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 5,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/Troll.jpg",
+    "slug": "troll",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 6,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/LionJugg.jpg",
+    "slug": "lionjugg",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 7,
+    "type": "intelligence",
+    "class": "support",
+    "role": "regen",
+    "image": "/heroes/Yeanling.jpg",
+    "slug": "yeanling",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 8,
+    "type": "agility",
+    "class": "ranger",
+    "role": "assassin",
+    "image": "/heroes/CatAssassin.jpg",
+    "slug": "catassassin",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 9,
+    "type": "agility",
+    "class": "ranger",
+    "role": "buffer",
+    "image": "/heroes/POM.jpg",
+    "slug": "pom",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 10,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/Wizard.jpg",
+    "slug": "wizard",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 11,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/DK.jpg",
+    "slug": "dk",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 12,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "aoe",
+    "image": "/heroes/nDP.jpg",
+    "slug": "ndp",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 13,
+    "type": "intelligence",
+    "class": "support",
+    "role": "regen",
+    "image": "/heroes/WD.jpg",
+    "slug": "wd",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 14,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/BoneArcher.jpg",
+    "slug": "bonearcher",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 15,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/Bear.jpg",
+    "slug": "bear",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 16,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/TD.jpg",
+    "slug": "td",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 17,
+    "type": "strength",
+    "class": "tank",
+    "role": "regen",
+    "image": "/heroes/OK.jpg",
+    "slug": "ok",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 18,
+    "type": "agility",
+    "class": "ranger",
+    "role": "assassin",
+    "image": "/heroes/SwordMaster.jpg",
+    "slug": "swordmaster",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 19,
+    "type": "intelligence",
+    "class": "support",
+    "role": "control",
+    "image": "/heroes/Puck.jpg",
+    "slug": "puck",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 20,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/SNK.jpg",
+    "slug": "snk",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 21,
+    "type": "agility",
+    "class": "ranger",
+    "role": "assassin",
+    "image": "/heroes/GodA.jpg",
+    "slug": "goda",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 22,
+    "type": "agility",
+    "class": "ranger",
+    "role": "control",
+    "image": "/heroes/DevilHunter.jpg",
+    "slug": "devilhunter",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 23,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Mag.jpg",
+    "slug": "mag",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 24,
+    "type": "strength",
+    "class": "warrior",
+    "role": "tank",
+    "image": "/heroes/TH.jpg",
+    "slug": "th",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 25,
+    "type": "strength",
+    "class": "support",
+    "role": "debuffer",
+    "image": "/heroes/Bane.jpg",
+    "slug": "bane",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 26,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "aoe",
+    "image": "/heroes/NOD.jpg",
+    "slug": "nod",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 27,
+    "type": "agility",
+    "class": "ranger",
+    "role": "aoe",
+    "image": "/heroes/ElfSaber.jpg",
+    "slug": "elfsaber",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 28,
+    "type": "strength",
+    "class": "warrior",
+    "role": "assassin",
+    "image": "/heroes/Pudge.jpg",
+    "slug": "pudge",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 29,
+    "type": "agility",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/GhostSaber.jpg",
+    "slug": "ghostsaber",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 30,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/GK.jpg",
+    "slug": "gk",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 31,
+    "type": "agility",
+    "class": "ranger",
+    "role": "assassin",
+    "image": "/heroes/Revenger.jpg",
+    "slug": "revenger",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 32,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "control",
+    "image": "/heroes/Lust.jpg",
+    "slug": "lust",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 33,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Turtle.jpg",
+    "slug": "turtle",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 34,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/Merchant.jpg",
+    "slug": "merchant",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 35,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/TwinsB.jpg",
+    "slug": "twinsb",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 36,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/Maid.jpg",
+    "slug": "maid",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 38,
+    "type": "agility",
+    "class": "warrior",
+    "role": "tank",
+    "image": "/heroes/Valkyrie.jpg",
+    "slug": "valkyrie",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 39,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "burst",
+    "image": "/heroes/FoxMagician.jpg",
+    "slug": "foxmagician",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 40,
+    "type": "agility",
+    "class": "warrior",
+    "role": "assassin",
+    "image": "/heroes/DT.jpg",
+    "slug": "dt",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 41,
+    "type": "strength",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/Longbow.jpg",
+    "slug": "longbow",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 42,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/TimeG.jpg",
+    "slug": "timeg",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 43,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "aoe",
+    "image": "/heroes/BunnyMaster.jpg",
+    "slug": "bunnymaster",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 44,
+    "type": "strength",
+    "class": "warrior",
+    "role": "tank",
+    "image": "/heroes/Wino.jpg",
+    "slug": "wino",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 45,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/Wolf.jpg",
+    "slug": "wolf",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 46,
+    "type": "strength",
+    "class": "warrior",
+    "role": "tank",
+    "image": "/heroes/SciMonster.jpg",
+    "slug": "scimonster",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 47,
+    "type": "agility",
+    "class": "support",
+    "role": "continuous",
+    "image": "/heroes/Phoenix.jpg",
+    "slug": "phoenix",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 48,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Arthur.jpg",
+    "slug": "arthur",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 49,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "control",
+    "image": "/heroes/IceD.jpg",
+    "slug": "iced",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 50,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/MK.jpg",
+    "slug": "mk",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 51,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "aoe",
+    "image": "/heroes/Wildkin.jpg",
+    "slug": "wildkin",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 52,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "control",
+    "image": "/heroes/NT.jpg",
+    "slug": "nt",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 53,
+    "type": "agility",
+    "class": "ranger",
+    "role": "assassin",
+    "image": "/heroes/NunAssassin.jpg",
+    "slug": "nunassassin",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 54,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Fat.jpg",
+    "slug": "fat",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 55,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "aoe",
+    "image": "/heroes/Mystic.jpg",
+    "slug": "mystic",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 56,
+    "type": "agility",
+    "class": "ranger",
+    "role": "assassin",
+    "image": "/heroes/HouseKeeper.jpg",
+    "slug": "housekeeper",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 57,
+    "type": "agility",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/UKYO.jpg",
+    "slug": "ukyo",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 58,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/Lizard.jpg",
+    "slug": "lizard",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 59,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Bones.jpg",
+    "slug": "bones",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 60,
+    "type": "strength",
+    "class": "tank",
+    "role": "control",
+    "image": "/heroes/OrcLeader.jpg",
+    "slug": "orcleader",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 61,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/Spring.jpg",
+    "slug": "spring",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 62,
+    "type": "agility",
+    "class": "ranger",
+    "role": "burst",
+    "image": "/heroes/Nakoruru.jpg",
+    "slug": "nakoruru",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 63,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/DKid.jpg",
+    "slug": "dkid",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 64,
+    "type": "agility",
+    "class": "ranger",
+    "role": "assassin",
+    "image": "/heroes/Ezio.jpg",
+    "slug": "ezio",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 65,
+    "type": "agility",
+    "class": "ranger",
+    "role": "burst",
+    "image": "/heroes/OA.jpg",
+    "slug": "oa",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 66,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/Phantom.jpg",
+    "slug": "phantom",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 67,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/Thor.jpg",
+    "slug": "thor",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 68,
+    "type": "agility",
+    "class": "ranger",
+    "role": "assassin",
+    "image": "/heroes/THW.jpg",
+    "slug": "thw",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 69,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Yalbed.jpg",
+    "slug": "yalbed",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 70,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/Anz.jpg",
+    "slug": "anz",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 71,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/SSR.jpg",
+    "slug": "ssr",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 72,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/UDD.jpg",
+    "slug": "udd",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 73,
+    "type": "agility",
+    "class": "support",
+    "role": "regen",
+    "image": "/heroes/GD.jpg",
+    "slug": "gd",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 74,
+    "type": "agility",
+    "class": "warrior",
+    "role": "debuffer",
+    "image": "/heroes/WinterL.jpg",
+    "slug": "winterl",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 75,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/QN.jpg",
+    "slug": "qn",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 76,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/JK.jpg",
+    "slug": "jk",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 77,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/TechMouse.jpg",
+    "slug": "techmouse",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 78,
+    "type": "agility",
+    "class": "ranger",
+    "role": "burst",
+    "image": "/heroes/WindMan.jpg",
+    "slug": "windman",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 79,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "aoe",
+    "image": "/heroes/Clergy.jpg",
+    "slug": "clergy",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 80,
+    "type": "intelligence",
+    "class": "support",
+    "role": "regen",
+    "image": "/heroes/Princess.jpg",
+    "slug": "princess",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 81,
+    "type": "agility",
+    "class": "ranger",
+    "role": "burst",
+    "image": "/heroes/TricRacoon.jpg",
+    "slug": "tricracoon",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 82,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/AstroM.jpg",
+    "slug": "astrom",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 83,
+    "type": "agility",
+    "class": "ranger",
+    "role": "burst",
+    "image": "/heroes/POP.jpg",
+    "slug": "pop",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 84,
+    "type": "intelligence",
+    "class": "support",
+    "role": "regen",
+    "image": "/heroes/Siren.jpg",
+    "slug": "siren",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 85,
+    "type": "intelligence",
+    "class": "support",
+    "role": "debuffer",
+    "image": "/heroes/GentryD.jpg",
+    "slug": "gentryd",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 86,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/Gunner.jpg",
+    "slug": "gunner",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 87,
+    "type": "intelligence",
+    "class": "support",
+    "role": "regen",
+    "image": "/heroes/Merlin.jpg",
+    "slug": "merlin",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 88,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/CrazyFox.jpg",
+    "slug": "crazyfox",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 89,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Golem.jpg",
+    "slug": "golem",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 90,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Captain.jpg",
+    "slug": "captain",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 91,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "control",
+    "image": "/heroes/DevilMage.jpg",
+    "slug": "devilmage",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 92,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/LazyD.jpg",
+    "slug": "lazyd",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 93,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Stone.jpg",
+    "slug": "stone",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 94,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "control",
+    "image": "/heroes/LDV.jpg",
+    "slug": "ldv",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 95,
+    "type": "strength",
+    "class": "tank",
+    "role": "control",
+    "image": "/heroes/BDruid.jpg",
+    "slug": "bdruid",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 96,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/Artisan.jpg",
+    "slug": "artisan",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 97,
+    "type": "agility",
+    "class": "ranger",
+    "role": "control",
+    "image": "/heroes/CKnight.jpg",
+    "slug": "cknight",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 98,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "control",
+    "image": "/heroes/SnakeMan.jpg",
+    "slug": "snakeman",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 99,
+    "type": "agility",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/FP.jpg",
+    "slug": "fp",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 100,
+    "type": "intelligence",
+    "class": "support",
+    "role": "regen",
+    "image": "/heroes/FlameE.jpg",
+    "slug": "flamee",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 101,
+    "type": "intelligence",
+    "class": "tank",
+    "role": "buffer",
+    "image": "/heroes/SPhoenix.jpg",
+    "slug": "sphoenix",
+    "faction": "celestials",
+    "isAwakened": true
+  },
+  {
+    "id": 102,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "burst",
+    "image": "/heroes/BM.jpg",
+    "slug": "bm",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 103,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "burst",
+    "image": "/heroes/Babayaga.jpg",
+    "slug": "babayaga",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 104,
+    "type": "agility",
+    "class": "support",
+    "role": "debuffer",
+    "image": "/heroes/Gaoler.jpg",
+    "slug": "gaoler",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 105,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/SBane.jpg",
+    "slug": "sbane",
+    "faction": "hypogeans",
+    "isAwakened": true
+  },
+  {
+    "id": 106,
+    "type": "agility",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/Scout.jpg",
+    "slug": "scout",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 107,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/AstroR.jpg",
+    "slug": "astror",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 108,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/DruidMaster.jpg",
+    "slug": "druidmaster",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 109,
+    "type": "agility",
+    "class": "ranger",
+    "role": "burst",
+    "image": "/heroes/WindSM.jpg",
+    "slug": "windsm",
+    "faction": "lightbearers",
+    "isAwakened": true
+  },
+  {
+    "id": 110,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "burst",
+    "image": "/heroes/Hidan.jpg",
+    "slug": "hidan",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 111,
+    "type": "agility",
+    "class": "tank",
+    "role": "buffer",
+    "image": "/heroes/Sonia.jpg",
+    "slug": "sonia",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 112,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/OrcMaster.jpg",
+    "slug": "orcmaster",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 113,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/Karen.jpg",
+    "slug": "karen",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 114,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/SLK.jpg",
+    "slug": "slk",
+    "faction": "maulers",
+    "isAwakened": true
+  },
+  {
+    "id": 115,
+    "type": "strength",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/JOA.jpg",
+    "slug": "joa",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 116,
+    "type": "agility",
+    "class": "ranger",
+    "role": "burst",
+    "image": "/heroes/Alen.jpg",
+    "slug": "alen",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 117,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/Patronus.jpg",
+    "slug": "patronus",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 118,
+    "type": "intelligence",
+    "class": "support",
+    "role": "regen",
+    "image": "/heroes/WNT.jpg",
+    "slug": "wnt",
+    "faction": "wilders",
+    "isAwakened": true
+  },
+  {
+    "id": 119,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "buffer",
+    "image": "/heroes/YNF.jpg",
+    "slug": "ynf",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 120,
+    "type": "agility",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/GOR.jpg",
+    "slug": "gor",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 121,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Chimera.jpg",
+    "slug": "chimera",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 122,
+    "type": "intelligence",
+    "class": "support",
+    "role": "regen",
+    "image": "/heroes/Flora.jpg",
+    "slug": "flora",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 123,
+    "type": "strength",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/SBD.jpg",
+    "slug": "sbd",
+    "faction": "graveborns",
+    "isAwakened": true
+  },
+  {
+    "id": 124,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/CurseCarrier.jpg",
+    "slug": "cursecarrier",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 125,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/Bishop.jpg",
+    "slug": "bishop",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 126,
+    "type": "agility",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Mars.jpg",
+    "slug": "mars",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 127,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/HML.jpg",
+    "slug": "hlm",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 128,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "burst",
+    "image": "/heroes/HFP.jpg",
+    "slug": "hfp",
+    "faction": "lightbearers",
+    "isAwakened": true
+  },
+  {
+    "id": 129,
+    "type": "agility",
+    "class": "warrior",
+    "role": "control",
+    "image": "/heroes/TSL.jpg",
+    "slug": "tsl",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 130,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/DOA.jpg",
+    "slug": "doa",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 131,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Adwin.jpg",
+    "slug": "adwin",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 132,
+    "type": "strength",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/BSparrow.jpg",
+    "slug": "bsparrow",
+    "faction": "hypogeans",
+    "isAwakened": true
+  },
+  {
+    "id": 133,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/Slacker.jpg",
+    "slug": "slacker",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 134,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "control",
+    "image": "/heroes/EMT.jpg",
+    "slug": "emt",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 135,
+    "type": "strength",
+    "class": "warrior",
+    "role": "continuous",
+    "image": "/heroes/RM.jpg",
+    "slug": "rm",
+    "faction": "dimensionals",
+    "isAwakened": false
+  },
+  {
+    "id": 136,
+    "type": "agility",
+    "class": "warrior",
+    "role": "burst",
+    "image": "/heroes/DivineBlade.jpg",
+    "slug": "divineblade",
+    "faction": "celestials",
+    "isAwakened": true
+  },
+  {
+    "id": 137,
+    "type": "strength",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/HammerMan.jpg",
+    "slug": "hammerman",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 138,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/Summer.jpg",
+    "slug": "summer",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 139,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/SO.jpg",
+    "slug": "so",
+    "faction": "wilders",
+    "isAwakened": false
+  },
+  {
+    "id": 140,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/SQ.jpg",
+    "slug": "sq",
+    "faction": "maulers",
+    "isAwakened": true
+  },
+  {
+    "id": 141,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/BC.jpg",
+    "slug": "bc",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 142,
+    "type": "strength",
+    "class": "tank",
+    "role": "regen",
+    "image": "/heroes/SWQ.jpg",
+    "slug": "swq",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 143,
+    "type": "intelligence",
+    "class": "support",
+    "role": "continuous",
+    "image": "/heroes/Liberta.jpg",
+    "slug": "liberta",
+    "faction": "celestials",
+    "isAwakened": false
+  },
+  {
+    "id": 144,
+    "type": "strength",
+    "class": "support",
+    "role": "debuffer",
+    "image": "/heroes/Lucilla.jpg",
+    "slug": "lucilla",
+    "faction": "hypogeans",
+    "isAwakened": false
+  }
+]

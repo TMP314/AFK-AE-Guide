@@ -4,9 +4,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>AFK AE Tool</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script> 
+        <script src="./js/init.js"></script>
+        <script src="./usermapping/heroes.js"></script>
+        <script src="./usermapping/beasts.js"></script>
+        <!-- <script src="./usermapping/userdata.js"></script> -->
         
     </head>
 
@@ -125,31 +129,27 @@
         </div>
 
         <div class="generate-container">
-                <div class="grid-container-h1">
-                    <div># Farm Heroes: </div>
-                    <label class="form-control">
-                        <div class="number-label"> 5 </div>
-                        <input type="radio" name="radio" id="5h" class="radio" checked="checked">
-                    </label>
-                    <label class="form-control">
-                        <div class="number-label"> 8 </div>
-                        <input type="radio" name="radio" id="8h" class="radio">
-                    </label>
-                    <label class="form-control">
-                        <div class="number-label"> 10 </div>
-                        <input type="radio" name="radio" id="10h" class="radio">
-                    </label>
+
+
+            <div class="grid-container-h3">
+                <div id="load-afk-info" class="button" onclick="showElement('#popup', 'grid')">
+                    <div class="center-text">Load AFKCalc Data</div>
                 </div>
-            </label>
-            <div class="grid-container-h2">
-                <div id="load-afk-info" class="button">
-                    <div class="center-text" onclick="showElement('#popup', 'grid')">Load Heroes and Beasts</div>
+                <div id="clear" class="button" onclick="clearTeams()">
+                    <div class="center-text">Clear Teams</div>
                 </div>
-                <div id="generate" class="button">
-                    <div class="center-text">Generate</div>
+                <!-- <div id="set-farm-heroes" class="button"  onclick="showElement('#popup-hero-farming', 'block')">
+                    <div class="center-text">Farm Team</div>
+                </div> -->
+                <div id="generate" class="button" onclick="startGuide()">
+                    <div class="center-text">Generate Guide</div>
                 </div>
             </div>
-            
+            <!-- <div id="show-guide" class="grid-container-h3 center-grid">
+                <div id="generate" class="button" onclick="startGuide()">
+                    <div class="center-text">Show Guide</div>
+                </div>
+            </div> -->
         </div>
 
         <div class="footer">
@@ -157,18 +157,33 @@
         </div>
 
         <div id="popup" class="popup">
-            <div class="popup-elements">Heroes</div>
-            <textarea id="hero-copy" class="textarea-popup">Copy the CharacterGrid_CharacterGrid class element here</textarea>
-            <div class="popup-elements">Beasts</div>
-            <textarea id="beast-copy" class="textarea-popup">Copy the PetGrid_PetGRid class element here</textarea>
-            <div id="load-data" class="button" onclick="loadHeroesAndBeasts()">
-                <div class="center-text">Load Data</div>
-            </div>
+            <div class="popup-header">Heroes</div>
+            <textarea id="hero-copy" class="textarea-popup">Copy the your AFKCalc JSON Text here, or upload the file</textarea>
+           
+            <div class="grid-container-h2">
+                    <div id="load-data" class="button input-wrapper">
+                       <div class="center-text">Load AFK Data as JSON</div>
+                       <input class="input" type="file" id="myfile" name="myfile">
+                   </div>
+                    
+                <div id="load-data" class="button" onclick="parseJSON()">
+                    <div class="center-text">Load Data</div>
+                </div>
+            </div>         
             <div class="close" onclick="hideElement('#popup')"></div>
         </div>
 
         <div id="popup-hero" class="popup-hero">
             <div class="popup-header">Select Hero</div>
+            <div class="popup-header grid-faction">
+                <div id="faction-lightbearers" class="faction-icon selected" onclick="selectFaction(this.id)"></div>
+                <div id="faction-maulers" class="faction-icon selected" onclick="selectFaction(this.id)"></div>
+                <div id="faction-wilders" class="faction-icon selected" onclick="selectFaction(this.id)"></div>
+                <div id="faction-graveborns" class="faction-icon selected" onclick="selectFaction(this.id)"></div>
+                <div id="faction-celestials" class="faction-icon selected" onclick="selectFaction(this.id)"></div>
+                <div id="faction-hypogeans" class="faction-icon selected" onclick="selectFaction(this.id)"></div>
+                <div id="faction-dimensionals" class="faction-icon selected" onclick="selectFaction(this.id)"></div>
+            </div>
             <div class="clear" onclick="clearHero()">Clear</div>
             <div class="close" onclick="hideElement('#popup-hero')"></div>
             <div id="popup-hero-grid" class="popup-grid"></div>
@@ -177,11 +192,246 @@
 
         <div id="popup-beast" class="popup-hero">
             <div class="popup-header">Select Beast</div>
-            <div class="clear" onclick="clearBeast()">Clear</div>
+            <div class="clear" onclick="clearHero()">Clear</div>
             <div class="close" onclick="hideElement('#popup-beast')"></div>
             <div id="popup-beast-grid" class="popup-grid"></div>
         </div>
 
+        <div id="popup-hero-farming" class="popup-hero">
+            <div class="popup-header">Select up to 10 Farm Heroes</div>
+            
+            <div class="grid-container">
+                <div id="f00" class="item-a hero"></div>
+                <div id="f01" class="item-b hero"></div>
+                <div id="f02" class="item-c hero"></div>
+                <div id="f03" class="item-d hero"></div>
+                <div id="f04" class="item-e hero"></div>
+                <div id="fb0" class="item-f beast"></div>
+            </div>
+            <div class="grid-container">
+                <div id="f05" class="item-a hero"></div>
+                <div id="f06" class="item-b hero"></div>
+                <div id="f07" class="item-c hero"></div>
+                <div id="f08" class="item-d hero"></div>
+                <div id="f09" class="item-e hero"></div>
+                <div id="fb1" class="item-f beast"></div>
+            </div>
+
+            <div class="close" onclick="hideElement('#popup-hero-farming')"></div>
+            <div id="popup-hero-grid" class="center-grid">
+                <div id="set-farm-team" class="button" onclick="generateGuide()">
+                    <div class="center-text" onclick="generateGuide()">Accept and Generate</div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="popup-guide-p1" class="popup">
+            <div class="popup-header">Select the number of Farm Heroes you are using?</div>
+
+            <div id="button-guide-p1-1" class="popup-header button guide-button" onclick="openFarmHeroMenu(5)">5 Heroes = Duo + Trio</div>
+            <div id="button-guide-p1-2" class="popup-header button guide-button" onclick="openFarmHeroMenu(7)">7 Heroes = 2xDuo + Trio</div>
+            <div id="button-guide-p1-3" class="popup-header button guide-button" onclick="openFarmHeroMenu(8)">8 Heroes = Duo + 2xTrio</div>
+            <div id="button-guide-p1-4" class="popup-header button guide-button" onclick="openFarmHeroMenu(10)">10 Heroes = 2xDuo + 2xTrio</div>
+            <div class="close" onclick="hideElement('#popup-guide-p1')"></div>
+        </div>
+
+        <div id="popup-guide-p2" class="popup">
+            <div class="popup-header">The guide outlines each phase of Abyssal Expedition</div>
+
+            <div class="popup-sub-header">Starting Phase Setup</div>
+            <div class="grid-container">
+                <div id="g00" class="item-a empty-hero">
+                    <div class="guide-hero-text">Pather</div>
+                </div>
+                <div id="g01" class="item-b empty-hero">
+                    <div class="guide-hero-text">T4 Duo 1</div>
+                </div>
+                <div id="g02" class="item-c empty-hero">
+                    <div class="guide-hero-text">T4 Duo 1</div>
+                </div>
+                <div id="g03" class="item-d empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g04" class="item-e empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb0" class="item-f empty-beast">
+                    <div class="guide-hero-text">Farm Pet</div>
+                </div>
+            </div>
+            <div class="grid-container">
+                <div id="g10" class="item-a empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g11" class="item-b empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g12" class="item-c empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g13" class="item-d empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g14" class="item-e empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb1" class="item-f empty-beast">
+                    <div class="guide-hero-text"></div>
+                </div>
+            </div>
+
+            <div class="popup-sub-header">After Depleting Slot 2 and 3 Stamina</div>
+            <div class="grid-container">
+                <div id="g20" class="item-a empty-hero">
+                    <div class="guide-hero-text">Pather</div>
+                </div>
+                <div id="g21" class="item-b empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g22" class="item-c empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g23" class="item-d empty-hero">
+                    <div class="guide-hero-text">T4 Duo</div>
+                </div>
+                <div id="g24" class="item-e empty-hero">
+                    <div class="guide-hero-text">T4 Duo</div>
+                </div>
+                <div id="gb2" class="item-f empty-beast">
+                    <div class="guide-hero-text"></div>
+                </div>
+            </div>
+            <div class="grid-container">
+                <div id="g30" class="item-a empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g31" class="item-b empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g32" class="item-c empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g33" class="item-d empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g34" class="item-e empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb3" class="item-f empty-beast">
+                    <div class="guide-hero-text">Farm Pet</div>
+                </div>
+            </div>
+
+            <div class="popup-sub-header">After Depleting Slot 4 and 5 Stamina</div>
+            <div class="grid-container">
+                <div id="g20" class="item-a empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g21" class="item-b empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g22" class="item-c empty-hero">
+                    <div class="guide-hero-text-header">Team 1 - Boss Comp</div>
+                </div>
+                <div id="g23" class="item-d empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g24" class="item-e empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb2" class="item-f empty-beast">
+                    <div class="guide-hero-text">Boss Pet</div>
+                </div>
+            </div>
+            <div class="grid-container">
+                <div id="g30" class="item-a empty-hero">
+                    <div class="guide-hero-text">Pather</div>
+                </div>
+                <div id="g31" class="item-b empty-hero">
+                    <div class="guide-hero-text">T4 Duo 1</div>
+                </div>
+                <div id="g32" class="item-c empty-hero">
+                    <div class="guide-hero-text">T4 Duo 1</div>
+                </div>
+                <div id="g33" class="item-d empty-hero">
+                    <div class="guide-hero-text">T4 Duo 2</div>
+                </div>
+                <div id="g34" class="item-e empty-hero">
+                    <div class="guide-hero-text">T4 Duo 2</div>
+                </div>
+                <div id="gb3" class="item-f empty-beast">
+                    <div class="guide-hero-text">Farm Pet</div>
+                </div>
+            </div>
+
+            <div class="popup-sub-header">After Unlocking 15 Hero Slots</div>
+            <div class="grid-container">
+                <div id="g20" class="item-a empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g21" class="item-b empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g22" class="item-c empty-hero">
+                    <div class="guide-hero-text-header">Team 1 - Boss Comp</div>
+                </div>
+                <div id="g23" class="item-d empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g24" class="item-e empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb2" class="item-f empty-beast">
+                    <div class="guide-hero-text">Boss Pet 1</div>
+                </div>
+            </div>
+            <div class="grid-container">
+                <div id="g30" class="item-a empty-hero">
+                    <div class="guide-hero-text">Pather</div>
+                </div>
+                <div id="g31" class="item-b empty-hero">
+                    <div class="guide-hero-text">T4 Duo 1</div>
+                </div>
+                <div id="g32" class="item-c empty-hero">
+                    <div class="guide-hero-text">T4 Duo 1</div>
+                </div>
+                <div id="g33" class="item-d empty-hero">
+                    <div class="guide-hero-text">T4 Duo 2</div>
+                </div>
+                <div id="g34" class="item-e empty-hero">
+                    <div class="guide-hero-text">T4 Duo 2</div>
+                </div>
+                <div id="gb3" class="item-f empty-beast">
+                    <div class="guide-hero-text">Farm Pet</div>
+                </div>
+            </div>
+            <div class="grid-container">
+                <div id="g20" class="item-a empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g21" class="item-b empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g22" class="item-c empty-hero">
+                    <div class="guide-hero-text-header">Team 2 - Boss Comp</div>
+                </div>
+                <div id="g23" class="item-d empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g24" class="item-e empty-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb2" class="item-f empty-beast">
+                    <div class="guide-hero-text">Boss Pet 2</div>
+                </div>
+            </div>
+
+            <div class="close" onclick="hideElement('#popup-guide-p2')"></div>
+        </div>
     </body>
+    <script src="./js/file_manager.js"></script>
+    
+    <script src="./js/images.js"></script>
     <script src="./js/scripts.js"></script>
 </html>
