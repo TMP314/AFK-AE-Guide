@@ -1,5 +1,14 @@
 
 var selectedHeroeBeastDivId;
+var selectedFactions = {
+    "faction-lightbearers": true,
+    "faction-maulers": true,
+    "faction-wilders": true,
+    "faction-graveborns": true,
+    "faction-celestials": true,
+    "faction-hypogeans": true,
+    "faction-dimensionals": true,
+};
 
 function onStartup() {
     // Apply to the Hero and Beast Images On Click Events to open pop-up to select hero
@@ -17,30 +26,51 @@ function onStartup() {
     loadState();
 }
 
-function isValidTeam(teamNumber) {
-    var validCounter = 0;
-    for (i=0;i++;i<5) {
-        if ($("#h" + teamNumber + i).hasClass("selectable-hero")) {
-            validCounter++;
-        }
-    }
-    if ($("#b" + teamNumber + "0").hasClass("selectable-beast")) {
-        validCounter++;
-    }
-    if (validCounter == 6) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
 function openSelectMenu(id) {
     var type = id.substring(0,1)
     var isFarmBeast = (id.substring(1,2) == "b")
+    var searchHero;
+    var teamHeroes = [];
+    var farmHeroes = [];
     selectedHeroeBeastDivId = id;
     if (type == "h" || (type == "f" && !isFarmBeast)) {
         if (loadedHeroes) {
+            //Show farm heroes in list
+            if (type != "f") {
+                for (h in allData["team"]) {
+                    searchHero = allData["team"][h]
+                    if (h.substr(0,1) == "f") {
+                        farmHeroes.push(searchHero)
+                    }
+                    else if(h.substr(0,1) == "h") {
+                        teamHeroes.push(searchHero)
+                    }
+                }
+                for (i in farmHeroes) {
+                    console.log(farmHeroes[i])
+                    if (!teamHeroes.includes(farmHeroes[i])) {
+                        showElement("#" + farmHeroes[i], "block")
+                    }
+                }
+            }
+            //Show team heroes in list
+            else {
+                for (h in allData["team"]) {
+                    searchHero = allData["team"][h]
+                    if (h.substr(0,1) == "f") {
+                        farmHeroes.push(searchHero)
+                    }
+                    else if(h.substr(0,1) == "h") {
+                        teamHeroes.push(searchHero)
+                    }
+                }
+                for (i in teamHeroes) {
+                    console.log(teamHeroes[i])
+                    if (!farmHeroes.includes(teamHeroes[i])) {
+                        showElement("#" + teamHeroes[i], "block")
+                    }
+                }
+            }
             showElement('#popup-hero','block')
         }
         else {
@@ -49,6 +79,42 @@ function openSelectMenu(id) {
     }
     if (type == "b" || isFarmBeast) {
         if (loadedBeasts) {
+            //Show farm beasts in list
+            if (type != "f") {
+                for (h in allData["team"]) {
+                    searchHero = allData["team"][h]
+                    if (h.substr(0,1) == "f") {
+                        farmHeroes.push(searchHero)
+                    }
+                    else if(h.substr(0,1) == "b") {
+                        teamHeroes.push(searchHero)
+                    }
+                }
+                for (i in farmHeroes) {
+                    console.log(farmHeroes[i])
+                    if (!teamHeroes.includes(farmHeroes[i])) {
+                        showElement("#" + farmHeroes[i], "block")
+                    }
+                }
+            }
+            //Show team beasts in list
+            else {
+                for (h in allData["team"]) {
+                    searchHero = allData["team"][h]
+                    if (h.substr(0,1) == "f") {
+                        farmHeroes.push(searchHero)
+                    }
+                    else if(h.substr(0,1) == "b") {
+                        teamHeroes.push(searchHero)
+                    }
+                }
+                for (i in teamHeroes) {
+                    console.log(teamHeroes[i])
+                    if (!farmHeroes.includes(teamHeroes[i])) {
+                        showElement("#" + teamHeroes[i], "block")
+                    }
+                }
+            }
             showElement('#popup-beast','block')
         }
         else {
@@ -58,6 +124,7 @@ function openSelectMenu(id) {
 }
 
 function addHeroToTeamSlot(teamSlot, heroId) {
+    var type = teamSlot.substr(0,1)
     if ($("#" + teamSlot).attr("hero-beast-id") != undefined) {
         $("#" + selectedHeroeBeastDivId).empty()
         $("#" + selectedHeroeBeastDivId).css('opacity','50%');
@@ -74,7 +141,8 @@ function addHeroToTeamSlot(teamSlot, heroId) {
     //Clone the selected hero, and update it's id
     $("#" + heroId).clone().appendTo($("#" + selectedHeroeBeastDivId));
     var id_old = $("#" + selectedHeroeBeastDivId).children("div").attr("id");
-    $("#" + selectedHeroeBeastDivId).children("div").attr("id", "picked-" + id_old)
+    $("#" + selectedHeroeBeastDivId).children("div").attr("id", "picked-" + type + "-" + id_old)
+    $("#" + "picked-" + type + "-" + id_old).css("display", "block");
 
     if (selectedHeroeBeastDivId.substring(0,1) == "h" || selectedHeroeBeastDivId.substring(0,2) == "f0") {
         hideElement("#popup-hero");
@@ -113,6 +181,7 @@ function addHeroBeastToSelection(divId) {
 }
 
 function removeHeroBeastFromSelection(divId) {
+    console.log("hiding hero " + divId) 
     $("#" + divId).css('display','none');
 }
 
@@ -187,6 +256,89 @@ var getObjectByValue = function (array, key, value) {
         return object[key] === value;
     });
 };
+
+function selectFaction(faction) {
+    selectedFactions[faction] = !selectedFactions[faction];
+    if (selectedFactions[faction]) {
+        $("#" + faction).removeClass("unselected")
+        $("#" + faction).addClass("selected")
+        for (i in allData["heroes"]) {
+            if ( "faction-" + allData["heroes"][i]["faction"] == faction) {
+                addHeroBeastToSelection(i)
+            }
+        }
+    }
+    else {
+        $("#" + faction).addClass("unselected")
+        $("#" + faction).removeClass("selected")
+        for (i in allData["heroes"]) {
+            if ( "faction-" + allData["heroes"][i]["faction"] == faction) {
+                removeHeroBeastFromSelection(i)
+            }
+        }
+    }
+}
+
+function isValidTeam() {
+    var beastCount = 0;
+    var heroCount = 0;
+    for (i in allData["team"]) {
+        if (i.substr(0,1) == "b") {
+            beastCount++
+        }
+        else if (i.substr(0,1) == "h") {
+            heroCount++
+        }
+    }
+    if (beastCount == 5 && heroCount == 25) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function startGuide() {
+    if (isValidTeam()) {
+        console.log("Team is valid, will start guide generation process")
+        showElement('#popup-guide-p1', 'block')
+    }
+    else {
+        window.alert("Please complete filling in your five teams")
+    }
+}
+
+function openFarmHeroMenu(heroCount) {
+    $("#popup-hero-farming").find(".popup-header").text("Select up to " + heroCount + " Farm Heroes")
+
+    if (heroCount == 5) {
+        hideElement("#f05")
+        hideElement("#f06")
+        hideElement("#f07")
+        hideElement("#f08")
+        hideElement("#f09")
+        hideElement("#fb1")
+    }
+    else if (heroCount == 7) {
+        hideElement("#f07")
+        hideElement("#f08")
+        hideElement("#f09")
+        hideElement("#fb1")
+    }
+    else if (heroCount == 8) {
+        hideElement("#f08")
+        hideElement("#f09")
+        hideElement("#fb1")
+    }
+    hideElement('#popup-guide-p1')
+    showElement('#popup-hero-farming', 'block')
+}
+
+function generateGuide() {
+    hideElement('#popup-hero-farming')
+    showElement('#popup-guide-p2', 'block')
+}
+
 
 onStartup();
 

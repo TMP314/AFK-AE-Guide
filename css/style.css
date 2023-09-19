@@ -11,6 +11,8 @@ body {
     padding-left: 18px;
     padding-right: 18px;
     text-align: center;
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
 }
 
 .header {
@@ -61,6 +63,33 @@ body {
     opacity: 0.5;
 }
 
+.empty-hero {
+    display: flex;
+    justify-content: center;
+    height: min(1.1 * 13vw, 1.1 * 64px);
+    background-position: center;
+    background-size: min(13vw,48px);
+    background-image: url("../img/heroes-frame/none.png");
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
+.guide-hero-text {
+    color: goldenrod;
+    position: relative;
+    top: -8px
+}
+
+.guide-hero-text-header {
+    width: 200%;
+    margin-left: -50%;
+    margin-right: -50%;
+    color: goldenrod;
+    position: relative;
+    top: -8px
+}
+
+
 .selectable-hero {
     height: min(1.1 * 13vw, 1.1 * 64px);
     background-position: center;
@@ -76,6 +105,18 @@ body {
     background-position: center;
     background-image: url("../img/pet.webp");
     background-size: min(calc(0.89 * 13vw), calc(0.89 * 64px));
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
+.empty-beast {
+    display: flex;
+    justify-content: center;
+    height: min(1.1 * 13vw, 1.1 * 64px);
+    background-position: center;
+    background-image: url("../img/beasts-frame/frame-rare.png");
+    background-size: min(calc(0.89 * 13vw), calc(0.89 * 56px));
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0.5;
@@ -107,6 +148,15 @@ body {
 .grid-container-h2 {
     display: grid;
     grid-template-columns: 48% 48% ;
+    font-size: min(0.9em, 4vh);
+    text-align: center;
+    place-content: center;
+    padding-top: 1vh;
+}
+
+.grid-container-h3 {
+    display: grid;
+    grid-template-columns: 31% 31% 31%;
     font-size: min(0.9em, 4vh);
     text-align: center;
     place-content: center;
@@ -165,6 +215,21 @@ input[type="radio"]:checked::before {
     transform: scale(1);
 }
 
+.button-disabled {
+    background-color: #404040;
+    width: min(120px, 32vw);
+    height: min(8vh, 40px);
+    font-size: min(calc(0.8 * (3vh - 8px)), 1.0em);
+    color: white;
+    position: relative;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-radius: 10px;
+}
+
 .button {
     width: min(120px, 32vw);
     height: min(8vh, 40px);
@@ -190,6 +255,10 @@ input[type="radio"]:checked::before {
 
 .center-text {
     margin: auto;
+}
+
+.center-grid {
+    grid-template-columns: auto;
 }
 
 .footer{
@@ -230,8 +299,9 @@ input[type="radio"]:checked::before {
     display: grid;
     grid-auto-rows: min-content;
     grid-template-columns: repeat(6, 16.6%);
+    grid-row-gap: 5px;
     overflow-y: auto;
-    height: 90%;
+    height: 80%;
     width: 90%;
     margin: auto;
     padding: 5px;
@@ -240,9 +310,82 @@ input[type="radio"]:checked::before {
 .popup-header {
     margin: auto;
     padding-top: 8px;
+    width: 90%;
+    font-size: min(4.2vw, 0.9em);
+}
+
+.popup-sub-header {
+    color: goldenrod;
+    text-align: left;
+    padding-top: 24px;
+    margin-bottom: 12px;
+    padding-left: 20px;
+    font-size: min(4.2vw, 0.8em);
+    border-bottom: goldenrod 1px solid;
+}
+
+.grid-faction {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(7, 25px);
+}
+
+.guide-button {
+    display: grid;
+    place-content: center;
+    margin-top: 10px;
+}
+
+.faction-selection {
+    margin: auto;
+    padding-top: 8px;
     padding-bottom: 8px;
     width: 90%;
     font-size: min(4.2vw, 0.9em);
+}
+
+.faction-icon {
+    height: 20px;
+    width: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#faction-lightbearers {
+    background-image: url("../img/factions/lightbearers.png");
+}
+
+#faction-maulers {
+    background-image: url("../img/factions/maulers.png");
+}
+
+#faction-wilders {
+    background-image: url("../img/factions/wilders.png");
+}
+
+#faction-graveborns {
+    background-image: url("../img/factions/graveborns.png");
+}
+
+#faction-celestials {
+    background-image: url("../img/factions/celestials.png");
+}
+
+#faction-hypogeans {
+    background-image: url("../img/factions/hypogeans.png");
+}
+
+#faction-dimensionals {
+    background-image: url("../img/factions/dimensionals.png");
+}
+
+.selected {
+    opacity: 100%;
+}
+
+.unselected {
+    opacity: 25%;
 }
 
 .textarea-popup {
@@ -265,6 +408,22 @@ input[type="radio"]:checked::before {
 
 #popup-hero-farming {
     z-index: 9;
+}
+
+#popup-guide {
+    z-index: 999;
+}
+
+#popup-guide-p2 {
+    width: min(80vw, 800px);
+    overflow-y: auto;
+    height: 100vh;
+    width: min(80vw, 800px);
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
 .close {
