@@ -50,6 +50,7 @@ function loadUserData(userData) {
             allData["heroes"][code] = userData[3]["heroes"][id]
         }
         allData["heroes"][code]["faction"] = faction
+        allData["heroes"][code]["img"] = heroesArray[h]["image"]
         createHeroDiv(code)
     }
     console.log("loaded heroes")
