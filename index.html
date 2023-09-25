@@ -8,6 +8,7 @@
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script> 
         <script src="./js/init.js"></script>
+        <script src="./js/mapping.js"></script>
         <script src="./usermapping/heroes.js"></script>
         <script src="./usermapping/beasts.js"></script>
         <!-- <script src="./usermapping/userdata.js"></script> -->
@@ -220,7 +221,7 @@
             <div class="close" onclick="hideElement('#popup-hero-farming')"></div>
             <div id="popup-hero-grid" class="center-grid">
                 <div id="set-farm-team" class="button" onclick="generateGuide()">
-                    <div class="center-text" onclick="generateGuide()">Accept and Generate</div>
+                    <div class="center-text">Accept and Generate</div>
                 </div>
             </div>
             
@@ -230,9 +231,9 @@
             <div class="popup-header">Select the number of Farm Heroes you are using?</div>
 
             <div id="button-guide-p1-1" class="popup-header button guide-button" onclick="openFarmHeroMenu(5)">5 Heroes = Duo + Trio</div>
-            <div id="button-guide-p1-2" class="popup-header button guide-button" onclick="openFarmHeroMenu(7)">7 Heroes = 2xDuo + Trio</div>
-            <div id="button-guide-p1-3" class="popup-header button guide-button" onclick="openFarmHeroMenu(8)">8 Heroes = Duo + 2xTrio</div>
-            <div id="button-guide-p1-4" class="popup-header button guide-button" onclick="openFarmHeroMenu(10)">10 Heroes = 2xDuo + 2xTrio</div>
+            <!-- <div id="button-guide-p1-2" class="popup-header button guide-button" onclick="openFarmHeroMenu(7)">7 Heroes = 2xDuo + Trio</div> -->
+            <!-- <div id="button-guide-p1-3" class="popup-header button guide-button" onclick="openFarmHeroMenu(8)">8 Heroes = Duo + 2xTrio</div> -->
+            <!-- <div id="button-guide-p1-4" class="popup-header button guide-button" onclick="openFarmHeroMenu(10)">10 Heroes = 2xDuo + 2xTrio</div> -->
             <div class="close" onclick="hideElement('#popup-guide-p1')"></div>
         </div>
 
@@ -240,190 +241,374 @@
             <div class="popup-header">The guide outlines each phase of Abyssal Expedition</div>
 
             <div class="popup-sub-header">Starting Phase Setup</div>
-            <div class="grid-container">
-                <div id="g00" class="item-a empty-hero">
+            <div class="grid-container-guide">
+                <div id="g00" class="item-a empty-guide-hero">
                     <div class="guide-hero-text">Pather</div>
                 </div>
-                <div id="g01" class="item-b empty-hero">
+                <div id="g01" class="item-b empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 1</div>
                 </div>
-                <div id="g02" class="item-c empty-hero">
+                <div id="g02" class="item-c empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 1</div>
                 </div>
-                <div id="g03" class="item-d empty-hero">
+                <div id="g03" class="item-d empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g04" class="item-e empty-hero">
+                <div id="g04" class="item-e empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="gb0" class="item-f empty-beast">
+                <div id="gb0" class="item-f empty-guide-beast">
                     <div class="guide-hero-text">Farm Pet</div>
                 </div>
             </div>
-            <div class="grid-container">
-                <div id="g10" class="item-a empty-hero">
+            <div class="grid-container-guide">
+                <div id="g10" class="item-a empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g11" class="item-b empty-hero">
+                <div id="g11" class="item-b empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g12" class="item-c empty-hero">
+                <div id="g12" class="item-c empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g13" class="item-d empty-hero">
+                <div id="g13" class="item-d empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g14" class="item-e empty-hero">
+                <div id="g14" class="item-e empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="gb1" class="item-f empty-beast">
+                <div id="gb1" class="item-f empty-guide-beast">
                     <div class="guide-hero-text"></div>
                 </div>
             </div>
 
             <div class="popup-sub-header">After Depleting Slot 2 and 3 Stamina</div>
-            <div class="grid-container">
-                <div id="g20" class="item-a empty-hero">
+            <div class="grid-container-guide">
+                <div id="g20" class="item-a empty-guide-hero">
                     <div class="guide-hero-text">Pather</div>
                 </div>
-                <div id="g21" class="item-b empty-hero">
+                <div id="g21" class="item-b empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g22" class="item-c empty-hero">
+                <div id="g22" class="item-c empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g23" class="item-d empty-hero">
+                <div id="g23" class="item-d empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo</div>
                 </div>
-                <div id="g24" class="item-e empty-hero">
+                <div id="g24" class="item-e empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo</div>
                 </div>
-                <div id="gb2" class="item-f empty-beast">
+                <div id="gb2" class="item-f empty-guide-beast">
                     <div class="guide-hero-text"></div>
                 </div>
             </div>
-            <div class="grid-container">
-                <div id="g30" class="item-a empty-hero">
+            <div class="grid-container-guide">
+                <div id="g30" class="item-a empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g31" class="item-b empty-hero">
+                <div id="g31" class="item-b empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g32" class="item-c empty-hero">
+                <div id="g32" class="item-c empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g33" class="item-d empty-hero">
+                <div id="g33" class="item-d empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g34" class="item-e empty-hero">
+                <div id="g34" class="item-e empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="gb3" class="item-f empty-beast">
+                <div id="gb3" class="item-f empty-guide-beast">
                     <div class="guide-hero-text">Farm Pet</div>
                 </div>
             </div>
 
             <div class="popup-sub-header">After Depleting Slot 4 and 5 Stamina</div>
-            <div class="grid-container">
-                <div id="g20" class="item-a empty-hero">
+            <div class="grid-container-guide">
+                <div id="g40" class="item-a empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g21" class="item-b empty-hero">
+                <div id="g41" class="item-b empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g22" class="item-c empty-hero">
+                <div id="g42" class="item-c empty-guide-hero">
                     <div class="guide-hero-text-header">Team 1 - Boss Comp</div>
                 </div>
-                <div id="g23" class="item-d empty-hero">
+                <div id="g43" class="item-d empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g24" class="item-e empty-hero">
+                <div id="g44" class="item-e empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="gb2" class="item-f empty-beast">
+                <div id="gb4" class="item-f empty-guide-beast">
                     <div class="guide-hero-text">Boss Pet</div>
                 </div>
             </div>
-            <div class="grid-container">
-                <div id="g30" class="item-a empty-hero">
+            <div class="grid-container-guide">
+                <div id="g50" class="item-a empty-guide-hero">
                     <div class="guide-hero-text">Pather</div>
                 </div>
-                <div id="g31" class="item-b empty-hero">
+                <div id="g51" class="item-b empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 1</div>
                 </div>
-                <div id="g32" class="item-c empty-hero">
+                <div id="g52" class="item-c empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 1</div>
                 </div>
-                <div id="g33" class="item-d empty-hero">
+                <div id="g53" class="item-d empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 2</div>
                 </div>
-                <div id="g34" class="item-e empty-hero">
+                <div id="g54" class="item-e empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 2</div>
                 </div>
-                <div id="gb3" class="item-f empty-beast">
+                <div id="gb5" class="item-f empty-guide-beast">
                     <div class="guide-hero-text">Farm Pet</div>
                 </div>
             </div>
 
             <div class="popup-sub-header">After Unlocking 15 Hero Slots</div>
-            <div class="grid-container">
-                <div id="g20" class="item-a empty-hero">
+            <div class="grid-container-guide">
+                <div id="g60" class="item-a empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g21" class="item-b empty-hero">
+                <div id="g61" class="item-b empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g22" class="item-c empty-hero">
+                <div id="g62" class="item-c empty-guide-hero">
                     <div class="guide-hero-text-header">Team 1 - Boss Comp</div>
                 </div>
-                <div id="g23" class="item-d empty-hero">
+                <div id="g63" class="item-d empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g24" class="item-e empty-hero">
+                <div id="g64" class="item-e empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="gb2" class="item-f empty-beast">
+                <div id="gb6" class="item-f empty-guide-beast">
                     <div class="guide-hero-text">Boss Pet 1</div>
                 </div>
             </div>
-            <div class="grid-container">
-                <div id="g30" class="item-a empty-hero">
+            <div class="grid-container-guide">
+                <div id="g70" class="item-a empty-guide-hero">
                     <div class="guide-hero-text">Pather</div>
                 </div>
-                <div id="g31" class="item-b empty-hero">
+                <div id="g71" class="item-b empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 1</div>
                 </div>
-                <div id="g32" class="item-c empty-hero">
+                <div id="g72" class="item-c empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 1</div>
                 </div>
-                <div id="g33" class="item-d empty-hero">
+                <div id="g73" class="item-d empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 2</div>
                 </div>
-                <div id="g34" class="item-e empty-hero">
+                <div id="g74" class="item-e empty-guide-hero">
                     <div class="guide-hero-text">T4 Duo 2</div>
                 </div>
-                <div id="gb3" class="item-f empty-beast">
+                <div id="gb7" class="item-f empty-guide-beast">
                     <div class="guide-hero-text">Farm Pet</div>
                 </div>
             </div>
-            <div class="grid-container">
-                <div id="g20" class="item-a empty-hero">
+            <div class="grid-container-guide">
+                <div id="g80" class="item-a empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g21" class="item-b empty-hero">
+                <div id="g81" class="item-b empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g22" class="item-c empty-hero">
+                <div id="g82" class="item-c empty-guide-hero">
                     <div class="guide-hero-text-header">Team 2 - Boss Comp</div>
                 </div>
-                <div id="g23" class="item-d empty-hero">
+                <div id="g83" class="item-d empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="g24" class="item-e empty-hero">
+                <div id="g84" class="item-e empty-guide-hero">
                     <div class="guide-hero-text"></div>
                 </div>
-                <div id="gb2" class="item-f empty-beast">
+                <div id="gb8" class="item-f empty-guide-beast">
                     <div class="guide-hero-text">Boss Pet 2</div>
+                </div>
+            </div>
+
+            <div class="popup-sub-header">After Unlocking 20 Hero Slots</div>
+            <div class="grid-container-guide">
+                <div id="g90" class="item-a empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g91" class="item-b empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g92" class="item-c empty-guide-hero">
+                    <div class="guide-hero-text-header">Team 1 - Boss Comp</div>
+                </div>
+                <div id="g93" class="item-d empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g94" class="item-e empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb9" class="item-f empty-guide-beast">
+                    <div class="guide-hero-text">Boss Pet 1</div>
+                </div>
+            </div>
+            <div class="grid-container-guide">
+                <div id="g100" class="item-a empty-guide-hero">
+                    <div class="guide-hero-text">Pather</div>
+                </div>
+                <div id="g101" class="item-b empty-guide-hero">
+                    <div class="guide-hero-text">T4 Duo 1</div>
+                </div>
+                <div id="g102" class="item-c empty-guide-hero">
+                    <div class="guide-hero-text">T4 Duo 1</div>
+                </div>
+                <div id="g103" class="item-d empty-guide-hero">
+                    <div class="guide-hero-text">T4 Duo 2</div>
+                </div>
+                <div id="g104" class="item-e empty-guide-hero">
+                    <div class="guide-hero-text">T4 Duo 2</div>
+                </div>
+                <div id="gb10" class="item-f empty-guide-beast">
+                    <div class="guide-hero-text">Farm Pet</div>
+                </div>
+            </div>
+            <div class="grid-container-guide">
+                <div id="g110" class="item-a empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g111" class="item-b empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g112" class="item-c empty-guide-hero">
+                    <div class="guide-hero-text-header">Team 2 - Boss Comp</div>
+                </div>
+                <div id="g113" class="item-d empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g114" class="item-e empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb11" class="item-f empty-guide-beast">
+                    <div class="guide-hero-text">Boss Pet 2</div>
+                </div>
+            </div>
+            <div class="grid-container-guide">
+                <div id="g120" class="item-a empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g121" class="item-b empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g122" class="item-c empty-guide-hero">
+                    <div class="guide-hero-text-header">Team 3 - Boss Comp</div>
+                </div>
+                <div id="g123" class="item-d empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g124" class="item-e empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb12" class="item-f empty-guide-beast">
+                    <div class="guide-hero-text">Boss Pet 3</div>
+                </div>
+            </div>
+
+            <div class="popup-sub-header">After Unlocking 25 Hero Slots</div>
+            <div class="grid-container-guide">
+                <div id="g130" class="item-a empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g131" class="item-b empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g132" class="item-c empty-guide-hero">
+                    <div class="guide-hero-text-header">Team 1 - Boss Comp</div>
+                </div>
+                <div id="g133" class="item-d empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g134" class="item-e empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb13" class="item-f empty-guide-beast">
+                    <div class="guide-hero-text">Boss Pet 1</div>
+                </div>
+            </div>
+            <div class="grid-container-guide">
+                <div id="g140" class="item-a empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g141" class="item-b empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g142" class="item-c empty-guide-hero">
+                    <div class="guide-hero-text-header">Team 5 - Boss Comp</div>
+                </div>
+                <div id="g143" class="item-d empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g144" class="item-e empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb14" class="item-f empty-guide-beast">
+                    <div class="guide-hero-text">Boss Pet 5</div>
+                </div>
+            </div>
+            <div class="grid-container-guide">
+                <div id="g150" class="item-a empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g151" class="item-b empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g152" class="item-c empty-guide-hero">
+                    <div class="guide-hero-text-header">Team 2 - Boss Comp</div>
+                </div>
+                <div id="g153" class="item-d empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g154" class="item-e empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb15" class="item-f empty-guide-beast">
+                    <div class="guide-hero-text">Boss Pet 2</div>
+                </div>
+            </div>
+            <div class="grid-container-guide">
+                <div id="g160" class="item-a empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g161" class="item-b empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g162" class="item-c empty-guide-hero">
+                    <div class="guide-hero-text-header">Team 3 - Boss Comp</div>
+                </div>
+                <div id="g163" class="item-d empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g164" class="item-e empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb16" class="item-f empty-guide-beast">
+                    <div class="guide-hero-text">Boss Pet 3</div>
+                </div>
+            </div>
+            <div class="grid-container-guide">
+                <div id="g170" class="item-a empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g171" class="item-b empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g172" class="item-c empty-guide-hero">
+                    <div class="guide-hero-text-header">Team 4 - Boss Comp</div>
+                </div>
+                <div id="g173" class="item-d empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="g174" class="item-e empty-guide-hero">
+                    <div class="guide-hero-text"></div>
+                </div>
+                <div id="gb17" class="item-f empty-guide-beast">
+                    <div class="guide-hero-text">Boss Pet 4</div>
                 </div>
             </div>
 

@@ -201,6 +201,30 @@ function clearTeams() {
             clearHero();
         }      
     });
+    clearGuide()
+}
+
+function clearGuide() {
+    var idStart;
+    $('.hero').each(function() {
+        idStart = $(this).attr('id').substr(0,5)   
+        if (idStart == "guide") {
+            this.remove()
+        }
+    });
+    $('.empty-guide-hero').each(function() {
+        $(this).removeAttr("style")
+    });
+
+    $('.beast').each(function() {
+        idStart = $(this).attr('id').substr(0,5)  
+        if (idStart == "guide") {
+            this.remove()
+        }
+    });
+    $('.empty-guide-beast').each(function() {
+        $(this).removeAttr("style")
+    });
 }
 
 function showElement(divId, type){
@@ -310,7 +334,7 @@ function startGuide() {
 
 function openFarmHeroMenu(heroCount) {
     $("#popup-hero-farming").find(".popup-header").text("Select up to " + heroCount + " Farm Heroes")
-
+    allData["numberOfFarmHeroes"] = heroCount
     if (heroCount == 5) {
         hideElement("#f05")
         hideElement("#f06")
@@ -337,8 +361,46 @@ function openFarmHeroMenu(heroCount) {
 function generateGuide() {
     hideElement('#popup-hero-farming')
     showElement('#popup-guide-p2', 'block')
+    setGuideData()
+    saveCurrentState()
 }
 
+function setGuideData() {
+    clearGuide()
+    for (i in mappingForGuide) {
+        allData["guide"][i] = mappingForGuide[i]
+    }
+
+    for (slot in allData["guide"]) {
+        if (slot.substr(1,1) != "b") {
+            //Clone the selected hero, and update it's id
+            $("#" + allData["guide"][slot]).clone().prependTo($("#" + slot));
+            $("#" + slot).children("div").attr("id", "guide-" + slot)
+            $("#" + "guide-" + slot).css("display", "block");
+            $("#" + "guide-" + slot).attr("class", "hero");
+            $("#" + "guide-" + slot).find(".hero-icon").attr("class", "hero-icon-guide");
+            $("#" + "guide-" + slot).css("position", "absolute");
+            $("#" + "guide-" + slot).find(".frame").attr("class", "frame-guide")
+            
+            $("#" + slot).css("opacity", 1.0);
+            $("#" + slot).css("background-image", "none");
+        }
+        else {
+            //Clone the selected beast, and update it's id
+            $("#" + allData["guide"][slot]).clone().prependTo($("#" + slot));
+            $("#" + slot).children("div").attr("id", "guide-" + slot)
+            $("#" + "guide-" + slot).css("display", "block");
+            $("#" + "guide-" + slot).attr("class", "beast");
+            $("#" + "guide-" + slot).find(".beast-icon").attr("class", "beast-icon-guide");
+            $("#" + "guide-" + slot).css("position", "absolute");
+            $("#" + "guide-" + slot).find(".frame").attr("class", "frame-guide")
+
+            $("#" + slot).css("opacity", 1.0);
+            $("#" + slot).css("background-image", "none");
+        }
+    }
+}
 
 onStartup();
 
+ 

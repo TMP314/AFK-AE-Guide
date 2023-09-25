@@ -74,10 +74,21 @@ body {
     opacity: 0.5;
 }
 
+.empty-guide-hero {
+    display: flex;
+    justify-content: center;
+    height: min(1.1 * 13vw, 1.1 * 48px);
+    background-position: center;
+    background-size: min(13vw,48px);
+    background-image: url("../img/heroes-frame/none.png");
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
 .guide-hero-text {
     color: goldenrod;
     position: relative;
-    top: -8px
+    top: -16px
 }
 
 .guide-hero-text-header {
@@ -86,9 +97,18 @@ body {
     margin-right: -50%;
     color: goldenrod;
     position: relative;
-    top: -8px
+    top: -16px
 }
 
+.grid-container-guide {
+    display: grid;
+    grid-template-columns: repeat(6, 16.6%);
+    font-size: small;
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    height: 52px;
+}
 
 .selectable-hero {
     height: min(1.1 * 13vw, 1.1 * 64px);
@@ -114,6 +134,18 @@ body {
     display: flex;
     justify-content: center;
     height: min(1.1 * 13vw, 1.1 * 64px);
+    background-position: center;
+    background-image: url("../img/beasts-frame/frame-rare.png");
+    background-size: min(calc(0.89 * 13vw), calc(0.89 * 56px));
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
+.empty-guide-beast {
+    display: flex;
+    justify-content: center;
+    height: min(1.1 * 13vw, 1.1 * 48px);
     background-position: center;
     background-image: url("../img/beasts-frame/frame-rare.png");
     background-size: min(calc(0.89 * 13vw), calc(0.89 * 56px));
@@ -317,8 +349,8 @@ input[type="radio"]:checked::before {
 .popup-sub-header {
     color: goldenrod;
     text-align: left;
-    padding-top: 24px;
-    margin-bottom: 12px;
+    padding-top: 14px;
+    margin-bottom: 16px;
     padding-left: 20px;
     font-size: min(4.2vw, 0.8em);
     border-bottom: goldenrod 1px solid;
@@ -472,9 +504,29 @@ input[type="radio"]:checked::before {
     opacity: 85%;
 }
 
+.hero-icon-guide {
+    height: 48px;
+    width: 48px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 25px 0px 25px 0px;
+    opacity: 85%;
+}
+
 .beast-icon {
     height: 64px;
     width: 64px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+    border-radius: 25px 0px 25px 0px;
+    opacity: 85%;
+}
+
+.beast-icon-guide {
+    height: 48px;
+    width: 48px;
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: top;
@@ -487,6 +539,15 @@ input[type="radio"]:checked::before {
     height: 64px;
     width: 64px;
     background-size: min(13vw, 64px);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.frame-guide  {
+    position: relative;
+    height: 48px;
+    width: 48px;
+    background-size: min(13vw, 48px);
     background-repeat: no-repeat;
     background-position: center;
 }

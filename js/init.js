@@ -2,7 +2,8 @@ var allData = {
     "heroes": {},
     "beasts": {},
     "team": {},
-    "guide": {}
+    "guide": {},
+    "numberOfFarmHeroes": 0
 }
 var loadedHeroes = false;
 var loadedBeasts = false;
