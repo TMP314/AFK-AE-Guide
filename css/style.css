@@ -15,6 +15,10 @@ body {
     print-color-adjust:exact !important;
 }
 
+#break {
+    page-break-before: always;
+}
+
 .header {
     font-size: min(6.2vw, 1.5em);
     font-weight: bold;
@@ -315,6 +319,17 @@ input[type="radio"]:checked::before {
     border-radius: 10px;
 }
 
+.guide-popup {
+    display: none;
+    grid-template-rows: min(5vh, 40px) min(29vh, 232px)  min(5vh, 40px)  min(29vh, 232px) min(5vh, 40px);
+    position: absolute;
+    margin: auto;
+    height: min(80vh, 800px);
+    width: min(80vw, 800px);
+    background-color: #404040;
+    border-radius: 10px;
+}
+
 .popup-hero {
     display: none;
     position: absolute;
@@ -448,14 +463,11 @@ input[type="radio"]:checked::before {
 
 #popup-guide-p2 {
     width: min(80vw, 800px);
-    overflow-y: auto;
-    height: 100vh;
+    height: max-content;
     width: min(80vw, 800px);
-    margin: auto;
     left: 0;
     right: 0;
     top: 0;
-    bottom: 0;
 }
 
 .close {
@@ -472,6 +484,17 @@ input[type="radio"]:checked::before {
 
 .close:hover {
     background-image: url("../img/close2.svg");
+}
+
+.print {
+    font-size: min(2.5vw, 0.8em);
+    position: absolute;
+    top: 0.5vh;
+    left: 1%;
+    height: 2.5vh;
+    width: 8vw;
+    display: grid;
+    place-content: center;
 }
 
 .clear {

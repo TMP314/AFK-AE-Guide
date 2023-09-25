@@ -5,11 +5,8 @@ function createHeroDiv(heroId) {
     var starBGDiv = document.createElement('div');
     var factionDiv = document.createElement('div');
     var rankDiv = document.createElement('div');
-
-    // var heroIcon = "img/heroes/" + heroId + ".jpg"
     var heroIcon = "img" + allData["heroes"][heroId]["img"]
     console.log("normal: " + heroIcon)
-    // console.log("from array: " + heroIcon2)
 
     var faction = "img/factions/" + allData["heroes"][heroId]["faction"] + ".png";
     var frame;

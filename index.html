@@ -7,11 +7,12 @@
         <link rel="stylesheet" type="text/css" href="./css/style.css">
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
         <script src="./js/init.js"></script>
         <script src="./js/mapping.js"></script>
         <script src="./usermapping/heroes.js"></script>
         <script src="./usermapping/beasts.js"></script>
-        <!-- <script src="./usermapping/userdata.js"></script> -->
         
     </head>
 
@@ -235,9 +236,10 @@
             <!-- <div id="button-guide-p1-3" class="popup-header button guide-button" onclick="openFarmHeroMenu(8)">8 Heroes = Duo + 2xTrio</div> -->
             <!-- <div id="button-guide-p1-4" class="popup-header button guide-button" onclick="openFarmHeroMenu(10)">10 Heroes = 2xDuo + 2xTrio</div> -->
             <div class="close" onclick="hideElement('#popup-guide-p1')"></div>
+            
         </div>
 
-        <div id="popup-guide-p2" class="popup">
+        <div id="popup-guide-p2" class="guide-popup">
             <div class="popup-header">The guide outlines each phase of Abyssal Expedition</div>
 
             <div class="popup-sub-header">Starting Phase Setup</div>
@@ -427,8 +429,7 @@
                     <div class="guide-hero-text">Boss Pet 2</div>
                 </div>
             </div>
-
-            <div class="popup-sub-header">After Unlocking 20 Hero Slots</div>
+            <div id="break" class="popup-sub-header">After Unlocking 20 Hero Slots</div>
             <div class="grid-container-guide">
                 <div id="g90" class="item-a empty-guide-hero">
                     <div class="guide-hero-text"></div>
@@ -613,10 +614,11 @@
             </div>
 
             <div class="close" onclick="hideElement('#popup-guide-p2')"></div>
+            <div class="print button" onclick="window.print()">Get PDF</div>
         </div>
     </body>
     <script src="./js/file_manager.js"></script>
-    
+    <script src="./js/pdf.js"></script>
     <script src="./js/images.js"></script>
     <script src="./js/scripts.js"></script>
 </html>
