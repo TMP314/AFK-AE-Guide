@@ -3,8 +3,12 @@
 03.     COMPLETED:  Add Clear All Teams Button
 04.     COMPLETED:  Add Button to Set Farm Heroes - via popup
 05.     COMPLETED:  Add Button to Clear All Farm Heroes - contained in the Set Farm Heroes popup
-06.                 Make it so the farm team hero selection will allow you to select heroes from your teams, and vice versa
-07.                 Program the Generate Guide functionality - handled via popup
-08.                 Include a faction filter for selecting heroes from both team and farm team popup - add a faction class
+06.     COMPLETED:  Make it so the farm team hero selection will allow you to select heroes from your teams, and vice versa
+07.     COMPLETED:  Program the Generate Guide functionality - handled via popup
+08.     COMPLETED:  Include a faction filter for selecting heroes from both team and farm team popup - add a faction class
                     to the divs, and just display: none them if filtering
+09.                 Fix bugs associated to filtering based on faction - appears to show all heroes or something
+10.                 Swap slots 1-5 to be Comp 2, and slots 11-15 to be Comp 1
+11.                 Allow for other size farm teams
+12.                 Allow for bulk upload of guild data, with automated guide saving as PDF
 
