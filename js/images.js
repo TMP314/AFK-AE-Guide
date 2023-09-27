@@ -6,7 +6,7 @@ function createHeroDiv(heroId) {
     var factionDiv = document.createElement('div');
     var rankDiv = document.createElement('div');
     var heroIcon = "img" + allData["heroes"][heroId]["img"]
-    console.log("normal: " + heroIcon)
+    // console.log("normal: " + heroIcon)
 
     var faction = "img/factions/" + allData["heroes"][heroId]["faction"] + ".png";
     var frame;

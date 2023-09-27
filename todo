@@ -7,8 +7,9 @@
 07.     COMPLETED:  Program the Generate Guide functionality - handled via popup
 08.     COMPLETED:  Include a faction filter for selecting heroes from both team and farm team popup - add a faction class
                     to the divs, and just display: none them if filtering
-09.                 Fix bugs associated to filtering based on faction - appears to show all heroes or something
-10.                 Swap slots 1-5 to be Comp 2, and slots 11-15 to be Comp 1
+09.     COMPLETED:  Fix bugs associated to filtering based on faction - appears to show all heroes or something
+10.     COMPLETED:  Swap slots 1-5 to be Comp 2, and slots 11-15 to be Comp 1
 11.                 Allow for other size farm teams
 12.                 Allow for bulk upload of guild data, with automated guide saving as PDF
+13.     COMPLETED:  Stop farm heroes being duplicated when they exist in a team for that particular phase
 

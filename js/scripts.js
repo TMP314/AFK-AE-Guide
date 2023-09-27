@@ -32,14 +32,15 @@ function openSelectMenu(id) {
     var searchHero;
     var teamHeroes = [];
     var farmHeroes = [];
+    var heroFaction;
     selectedHeroeBeastDivId = id;
+    console.log(id)
     if (type == "h" || (type == "f" && !isFarmBeast)) {
         if (loadedHeroes) {
             //Show farm heroes in list
             if (type != "f") {
                 for (h in allData["team"]) {
-                    searchHero = allData["team"][h]
-                    if (h.substr(0,1) == "f") {
+                    if (h.substr(0,1) == "f" && h.substr(1,1) != "b") {
                         farmHeroes.push(searchHero)
                     }
                     else if(h.substr(0,1) == "h") {
@@ -47,9 +48,13 @@ function openSelectMenu(id) {
                     }
                 }
                 for (i in farmHeroes) {
-                    console.log(farmHeroes[i])
                     if (!teamHeroes.includes(farmHeroes[i])) {
-                        showElement("#" + farmHeroes[i], "block")
+                        //Check that the faction is not filtered out
+                        heroFaction = allData["heroes"][farmHeroes[i]]["faction"]
+                        if (selectedFactions["faction-" + heroFaction]) {
+                            showElement("#" + farmHeroes[i], "block")
+                        }
+                        
                     }
                 }
             }
@@ -57,7 +62,7 @@ function openSelectMenu(id) {
             else {
                 for (h in allData["team"]) {
                     searchHero = allData["team"][h]
-                    if (h.substr(0,1) == "f") {
+                    if (h.substr(0,1) == "f" && h.substr(1,1) != "b") {
                         farmHeroes.push(searchHero)
                     }
                     else if(h.substr(0,1) == "h") {
@@ -65,9 +70,14 @@ function openSelectMenu(id) {
                     }
                 }
                 for (i in teamHeroes) {
-                    console.log(teamHeroes[i])
+                    // console.log(teamHeroes[i])
                     if (!farmHeroes.includes(teamHeroes[i])) {
-                        showElement("#" + teamHeroes[i], "block")
+                        //Check that the faction is not filtered out
+                        heroFaction = allData["heroes"][teamHeroes[i]]["faction"]
+                        if (selectedFactions["faction-" + heroFaction]) {
+                            showElement("#" + teamHeroes[i], "block")
+                        }
+                        
                     }
                 }
             }
@@ -75,6 +85,12 @@ function openSelectMenu(id) {
         }
         else {
             window.alert("Please load your heroes so that you can select one.")
+        }
+    }
+    for (f in selectedFactions) {
+        if (selectedFactions[f]) {
+            selectFaction(f)
+            selectFaction(f)
         }
     }
     if (type == "b" || isFarmBeast) {
@@ -91,7 +107,7 @@ function openSelectMenu(id) {
                     }
                 }
                 for (i in farmHeroes) {
-                    console.log(farmHeroes[i])
+                    // console.log(farmHeroes[i])
                     if (!teamHeroes.includes(farmHeroes[i])) {
                         showElement("#" + farmHeroes[i], "block")
                     }
@@ -125,12 +141,16 @@ function openSelectMenu(id) {
 
 function addHeroToTeamSlot(teamSlot, heroId) {
     var type = teamSlot.substr(0,1)
+    var faction = allData["team"][selectedHeroeBeastDivId]["faction"]
     if ($("#" + teamSlot).attr("hero-beast-id") != undefined) {
         $("#" + selectedHeroeBeastDivId).empty()
         $("#" + selectedHeroeBeastDivId).css('opacity','50%');
         $("#" + selectedHeroeBeastDivId).removeAttr("hero-beast-id");
         $("#" + selectedHeroeBeastDivId).removeAttr("style");
-        addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
+        if (selectedFactions["faction-" + faction]) {
+            addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
+        }
+        // addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
         delete allData["team"][selectedHeroeBeastDivId];
     }
 
@@ -158,6 +178,7 @@ function addHeroToTeamSlot(teamSlot, heroId) {
 }
 
 function clearHero() {
+    var faction = allData["team"][selectedHeroeBeastDivId]["faction"]
     $("#" + selectedHeroeBeastDivId).empty()
     $("#" + selectedHeroeBeastDivId).css('opacity','50%');
     $("#" + selectedHeroeBeastDivId).removeAttr("hero-beast-id");
@@ -169,7 +190,10 @@ function clearHero() {
         hideElement("#popup-beast");
     }
     
-    addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
+    if (selectedFactions["faction-" + faction]) {
+        addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
+    }
+    // addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
     delete allData["team"][selectedHeroeBeastDivId];
     saveCurrentState();
     selectedHeroeBeastDivId = null;
@@ -181,7 +205,7 @@ function addHeroBeastToSelection(divId) {
 }
 
 function removeHeroBeastFromSelection(divId) {
-    console.log("hiding hero " + divId) 
+    // console.log("hiding hero " + divId) 
     $("#" + divId).css('display','none');
 }
 
@@ -271,7 +295,7 @@ function loadState() {
         }    
     }
     catch {
-        console.log("Couldn't load pre-saved allData")
+        // console.log("Couldn't load pre-saved allData")
     }
 }
 
@@ -282,13 +306,38 @@ var getObjectByValue = function (array, key, value) {
 };
 
 function selectFaction(faction) {
+    var showHero = true;
     selectedFactions[faction] = !selectedFactions[faction];
     if (selectedFactions[faction]) {
         $("#" + faction).removeClass("unselected")
         $("#" + faction).addClass("selected")
         for (i in allData["heroes"]) {
+            
             if ( "faction-" + allData["heroes"][i]["faction"] == faction) {
-                addHeroBeastToSelection(i)
+                showHero = true;
+                if (selectedHeroeBeastDivId.substr(0,1) == "f") {
+                    for (h in allData["team"]) {
+                        if (i == allData["team"][h] && h.substr(0,1) == "f") {
+                            // console.log("Hero " + i + " exists in team at slot " + h)
+                            showHero = false;
+                        }
+                    }
+                    if (showHero) {
+                        addHeroBeastToSelection(i)
+                    }
+                }
+                if (selectedHeroeBeastDivId.substr(0,1) == "h") {
+                    for (h in allData["team"]) {
+                        if (i == allData["team"][h] && h.substr(0,1) == "h") {
+                            // console.log("Hero " + i + " exists in team at slot " + h)
+                            showHero = false;
+                        }
+                    }
+                    if (showHero) {
+                        // console.log("Adding hero " + i)
+                        addHeroBeastToSelection(i)
+                    }
+                }
             }
         }
     }
@@ -324,7 +373,7 @@ function isValidTeam() {
 
 function startGuide() {
     if (isValidTeam()) {
-        console.log("Team is valid, will start guide generation process")
+        // console.log("Team is valid, will start guide generation process")
         showElement('#popup-guide-p1', 'block')
     }
     else {
@@ -366,37 +415,101 @@ function generateGuide() {
 }
 
 function setGuideData() {
+    var guideLength;
+    var guideRow;
+    var phase;
+    var currentCell;
+    var canAddFarmhero = true;
+    var canAddFarmBeast = true;
     clearGuide()
     for (i in mappingForGuide) {
         allData["guide"][i] = mappingForGuide[i]
     }
 
     for (slot in allData["guide"]) {
+        guideLength = slot.length
+        // console.log("Length: " + guideLength)
         if (slot.substr(1,1) != "b") {
-            //Clone the selected hero, and update it's id
-            $("#" + allData["guide"][slot]).clone().prependTo($("#" + slot));
-            $("#" + slot).children("div").attr("id", "guide-" + slot)
-            $("#" + "guide-" + slot).css("display", "block");
-            $("#" + "guide-" + slot).attr("class", "hero");
-            $("#" + "guide-" + slot).find(".hero-icon").attr("class", "hero-icon-guide");
-            $("#" + "guide-" + slot).css("position", "absolute");
-            $("#" + "guide-" + slot).find(".frame").attr("class", "frame-guide")
-            
-            $("#" + slot).css("opacity", 1.0);
-            $("#" + slot).css("background-image", "none");
+            guideRow = slot.substr(1,guideLength-2)
         }
         else {
-            //Clone the selected beast, and update it's id
-            $("#" + allData["guide"][slot]).clone().prependTo($("#" + slot));
-            $("#" + slot).children("div").attr("id", "guide-" + slot)
-            $("#" + "guide-" + slot).css("display", "block");
-            $("#" + "guide-" + slot).attr("class", "beast");
-            $("#" + "guide-" + slot).find(".beast-icon").attr("class", "beast-icon-guide");
-            $("#" + "guide-" + slot).css("position", "absolute");
-            $("#" + "guide-" + slot).find(".frame").attr("class", "frame-guide")
+            guideRow = slot.substr(2,guideLength-2)
+        }
+        for (p in guidePhases) {
+            // console.log("checking p: " + p + " in " + guidePhases)
+            if (guidePhases[p].includes(guideRow*1)) {
+                phase = p;
+            }
+        }
+        // console.log("Row: " + guideRow)
+        // console.log("Phase: " + phase)
+        canAddFarmhero = true;
+        canAddFarmBeast = true;
+        if (slot.substr(1,1) != "b") {
+            //Check if the current hero to be placed is a farm hero, and if so, does it exist anywhere in the current phase
+            if (allData["guide"][slot].substr(0,1) == "f") {
+                for (phaseRow in guidePhases[phase]) {
+                    for (let cell=0;cell<5;cell++) {
+                        currentCell = "g" + guidePhases[phase][phaseRow] + cell
+                        // console.log("Phaserow: " + guidePhases[phase][phaseRow])
+                        // console.log("Checking for slot: " + slot + " against guide slot: " + currentCell)
+                        // console.log("For hero: " + allData["team"][allData["guide"][slot]] + " against guide hero: " + allData["team"][allData["guide"][currentCell]])
+                        if ((allData["team"][allData["guide"][slot]] == allData["team"][allData["guide"][currentCell]]) && allData["guide"][currentCell].substr(0,1) != "f") {
+                            console.log("Current farm hero: " + allData["guide"][slot])
+                            console.log("is being used/to be used at: " + currentCell)
+                            console.log("will not be adding this farm hero, and instead will keep it blank.")
+                            canAddFarmhero = false;
+                        }
+                    }
+                }
+            }
+            
 
-            $("#" + slot).css("opacity", 1.0);
-            $("#" + slot).css("background-image", "none");
+            if (canAddFarmhero) {
+                //Clone the selected hero, and update it's id
+                $("#" + allData["guide"][slot]).clone().prependTo($("#" + slot));
+                $("#" + slot).children("div").attr("id", "guide-" + slot)
+                $("#" + "guide-" + slot).css("display", "block");
+                $("#" + "guide-" + slot).attr("class", "hero");
+                $("#" + "guide-" + slot).find(".hero-icon").attr("class", "hero-icon-guide");
+                $("#" + "guide-" + slot).css("position", "absolute");
+                $("#" + "guide-" + slot).find(".frame").attr("class", "frame-guide")
+
+                $("#" + slot).css("opacity", 1.0);
+                $("#" + slot).css("background-image", "none");
+            }
+            
+        }
+        else {
+            if (allData["guide"][slot].substr(0,1) == "f") {
+                for (phaseRow in guidePhases[phase]) {
+                    currentCell = "gb" + guidePhases[phase][phaseRow]
+                    // console.log("Phaserow: " + guidePhases[phase][phaseRow])
+                    // console.log("Checking for slot: " + slot + " against guide slot: " + currentCell)
+                    // console.log("For hero: " + allData["team"][allData["guide"][slot]] + " against guide hero: " + allData["team"][allData["guide"][currentCell]])
+                    if ((allData["team"][allData["guide"][slot]] == allData["team"][allData["guide"][currentCell]]) && allData["guide"][currentCell].substr(0,1) != "f") {
+                        console.log("Current farm hero: " + allData["guide"][slot])
+                        console.log("is being used/to be used at: " + currentCell)
+                        console.log("will not be adding this farm hero, and instead will keep it blank.")
+                        canAddFarmBeast = false;
+                    }
+                }
+            }
+
+            if (canAddFarmBeast) {
+                //Clone the selected beast, and update it's id
+                $("#" + allData["guide"][slot]).clone().prependTo($("#" + slot));
+                $("#" + slot).children("div").attr("id", "guide-" + slot)
+                $("#" + "guide-" + slot).css("display", "block");
+                $("#" + "guide-" + slot).attr("class", "beast");
+                $("#" + "guide-" + slot).find(".beast-icon").attr("class", "beast-icon-guide");
+                $("#" + "guide-" + slot).css("position", "absolute");
+                $("#" + "guide-" + slot).find(".frame").attr("class", "frame-guide")
+
+                $("#" + slot).css("opacity", 1.0);
+                $("#" + slot).css("background-image", "none");
+            }
+            
         }
     }
 }
