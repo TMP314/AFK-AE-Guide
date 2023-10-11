@@ -1,36 +1,46 @@
-var file = null;
-var fileInput = document.getElementById('myfile')
-    fileInput.addEventListener('change', function () {
-        file = fileInput.files[0]
+var fileHero = null;
+var fileGuild = null;
+var fileInputHero = document.getElementById('myfile')
+fileInputHero.addEventListener('change', function () {
+        fileHero = fileInputHero.files[0]
         let reader = new FileReader();
+        try {
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+                return function(e) {
+                $("#hero-copy").val( e.target.result );
+            };
+            })(fileHero);
 
-        // Closure to capture the file information.
-        reader.onload = (function(theFile) {
-        return function(e) {
-        $("#hero-copy").val( e.target.result );
-    };
-    })(file);
-
-    // Read in the image file as a data URL.
-    reader.readAsText(file);
+            // Read in the image file as a data URL.
+            reader.readAsText(fileHero);
+        }
+        catch {
+            console.log("no file selected")
+        }  
 }, false);
+
+
+
+
+function getKeyByValue(object, value) { 
+    return Object.keys(object).find(key => 
+        object[key] === value); 
+}
 
 function parseJSON() {
     var heroCopy = $("#hero-copy").val();
-    if (file != null && file["type"] == "application/json") {
-        if (heroCopy != undefined || heroCopy != "Copy the your AFKCalc JSON Text here, or upload the file") {
-            try {
-                userData = JSON.parse(heroCopy);
-                loadUserData(userData)
-            }
-            catch {
-                window.alert("Please load valid hero data into the text box");
-            }
+    if (heroCopy != undefined || heroCopy != "Copy your AFKCalc JSON or Guild's JSON Text here, or upload either file") {
+        try {
+            userData = JSON.parse(heroCopy);
+            loadUserData(userData)
+            saveCurrentState()
         }
-    } 
-    else {
-        window.alert("Please load hero data either as a JSON file, or into the text box");
+        catch {
+            window.alert("Please load valid hero data into the text box");
+        }
     }
+
 }
 
 function loadUserData(userData) {

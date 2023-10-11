@@ -34,7 +34,6 @@ function openSelectMenu(id) {
     var farmHeroes = [];
     var heroFaction;
     selectedHeroeBeastDivId = id;
-    console.log(id)
     if (type == "h" || (type == "f" && !isFarmBeast)) {
         if (loadedHeroes) {
             //Show farm heroes in list
@@ -139,9 +138,20 @@ function openSelectMenu(id) {
     }
 }
 
+function clearAllData() {
+    localStorage.removeItem("allData");
+}
+
 function addHeroToTeamSlot(teamSlot, heroId) {
     var type = teamSlot.substr(0,1)
-    var faction = allData["team"][selectedHeroeBeastDivId]["faction"]
+    var farmtype = teamSlot.substr(0,2)
+    if (type != "b" && farmtype != "fb") {
+        var faction = allData["team"][selectedHeroeBeastDivId]["faction"]
+        faction = allData["heroes"][heroId]["faction"]
+        console.log(faction)
+    }
+    
+    
     if ($("#" + teamSlot).attr("hero-beast-id") != undefined) {
         $("#" + selectedHeroeBeastDivId).empty()
         $("#" + selectedHeroeBeastDivId).css('opacity','50%');
@@ -150,7 +160,7 @@ function addHeroToTeamSlot(teamSlot, heroId) {
         if (selectedFactions["faction-" + faction]) {
             addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
         }
-        // addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
+        // addHeroBeastToSelection( ][selectedHeroeBeastDivId]);
         delete allData["team"][selectedHeroeBeastDivId];
     }
 
@@ -164,10 +174,10 @@ function addHeroToTeamSlot(teamSlot, heroId) {
     $("#" + selectedHeroeBeastDivId).children("div").attr("id", "picked-" + type + "-" + id_old)
     $("#" + "picked-" + type + "-" + id_old).css("display", "block");
 
-    if (selectedHeroeBeastDivId.substring(0,1) == "h" || selectedHeroeBeastDivId.substring(0,2) == "f0") {
+    if (selectedHeroeBeastDivId.substring(0,1) == "h" || (selectedHeroeBeastDivId.substring(0,1) == "g" && selectedHeroeBeastDivId.substring(0,2) != "gb") || selectedHeroeBeastDivId.substring(0,2) == "f0") {
         hideElement("#popup-hero");
     }
-    else if (selectedHeroeBeastDivId.substring(0,1) == "b" || selectedHeroeBeastDivId.substring(0,2) == "fb") {
+    else if (selectedHeroeBeastDivId.substring(0,1) == "b" || selectedHeroeBeastDivId.substring(0,2) == "gb" || selectedHeroeBeastDivId.substring(0,2) == "fb") {
         hideElement("#popup-beast");
     }
     removeHeroBeastFromSelection(heroId);
@@ -200,7 +210,7 @@ function clearHero() {
 }
 
 function addHeroBeastToSelection(divId) {
-    console.log("adding hero " + divId) 
+    // console.log("adding hero " + divId) 
     $("#" + divId).css('display','block');
 }
 
@@ -259,6 +269,14 @@ function showElement(divId, type){
     $(".footer").addClass("blur");
 }
 
+function showElementChildren(divId, type){
+    $(divId).children().css("display", type);
+    $(".header").addClass("blur");
+    $(".main").addClass("blur");
+    $(".generate-container").addClass("blur");
+    $(".footer").addClass("blur");
+}
+
 function hideElement(divId) {
     $(divId).css("display", "none");
     $(".header").removeClass("blur");
@@ -290,12 +308,28 @@ function loadState() {
             }
             for (t in allData["team"]) {
                 selectedHeroeBeastDivId = t
+                console.log("Trying to add " + t)
                 addHeroToTeamSlot(t, allData["team"][t])
             }
-        }    
+            $("#sod").prop("checked", allData["sod"])
+            enableDisableTeam6()
+        }   
     }
     catch {
-        // console.log("Couldn't load pre-saved allData")
+        console.log("Couldn't load pre-saved allData")
+    }
+}
+
+function enableDisableTeam6() {
+    if ($("#sod").is(":checked")) {
+        $("#sod-team").css("display","block")
+        allData["sod"] = true
+        localStorage.setItem('allData', JSON.stringify(allData));
+    }
+    else {
+        $("#sod-team").css("display","none")
+        allData["sod"] = false
+        localStorage.setItem('allData', JSON.stringify(allData));
     }
 }
 
@@ -311,7 +345,7 @@ function selectFaction(faction) {
     if (selectedFactions[faction]) {
         $("#" + faction).removeClass("unselected")
         $("#" + faction).addClass("selected")
-        for (i in allData["heroes"]) {
+        for (i in allData["heroes"]) { 
             
             if ( "faction-" + allData["heroes"][i]["faction"] == faction) {
                 showHero = true;
@@ -326,18 +360,19 @@ function selectFaction(faction) {
                         addHeroBeastToSelection(i)
                     }
                 }
-                if (selectedHeroeBeastDivId.substr(0,1) == "h") {
+                if (selectedHeroeBeastDivId.substr(0,1) == "h" || selectedHeroeBeastDivId.substr(0,1) == "g" ) {
                     for (h in allData["team"]) {
                         if (i == allData["team"][h] && h.substr(0,1) == "h") {
                             // console.log("Hero " + i + " exists in team at slot " + h)
                             showHero = false;
                         }
                     }
-                    if (showHero) {
+                    if (showHero || selectedHeroeBeastDivId.substr(0,1) == "g") {
                         // console.log("Adding hero " + i)
                         addHeroBeastToSelection(i)
                     }
                 }
+
             }
         }
     }

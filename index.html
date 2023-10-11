@@ -10,6 +10,7 @@
         <script src="./js/init.js"></script>
         <script src="./js/mapping.js"></script>
         <script src="./usermapping/heroes.js"></script>
+        <script src="./usermapping/heroesName.js"></script>
         <script src="./usermapping/beasts.js"></script>
         
     </head>
@@ -126,11 +127,30 @@
                     <div id="b40" class="item-f beast"></div>
                 </div>
             </div>
+            <div class="team-container" id="sod-team">
+                <div class="grid-header">
+                    Team 6
+                </div>
+                <div class="grid-container">
+                    <div class="item-a">Hero 1</div>
+                    <div class="item-b">Hero 2</div>
+                    <div class="item-c">Hero 3</div>
+                    <div class="item-d">Hero 4</div>
+                    <div class="item-e">Hero 5</div>
+                    <div class="item-f">Beast 1</div>
+                </div>
+                <div class="grid-container">
+                    <div id="h50" class="item-a hero"></div>
+                    <div id="h51" class="item-b hero"></div>
+                    <div id="h52" class="item-c hero"></div>
+                    <div id="h53" class="item-d hero"></div>
+                    <div id="h54" class="item-e hero"></div>
+                    <div id="b50" class="item-f beast"></div>
+                </div>
+            </div>
         </div>
 
         <div class="generate-container">
-
-
             <div class="grid-container-h3">
                 <div id="load-afk-info" class="button" onclick="showElement('#popup', 'grid')">
                     <div class="center-text">Load AFKCalc Data</div>
@@ -138,41 +158,35 @@
                 <div id="clear" class="button" onclick="clearTeams()">
                     <div class="center-text">Clear Teams</div>
                 </div>
-                <!-- <div id="set-farm-heroes" class="button"  onclick="showElement('#popup-hero-farming', 'block')">
-                    <div class="center-text">Farm Team</div>
-                </div> -->
                 <div id="generate" class="button" onclick="startGuide()">
                     <div class="center-text">Generate Guide</div>
                 </div>
             </div>
-            <!-- <div id="show-guide" class="grid-container-h3 center-grid">
-                <div id="generate" class="button" onclick="startGuide()">
-                    <div class="center-text">Show Guide</div>
-                </div>
-            </div> -->
         </div>
 
         <div class="footer">
-            Version: 0.1a
+            Version: 0.9
+            <div id="clear-all-data" class="button clear" onclick="clearAllData()">
+                <div class="center-text">Clear All Data</div>
+            </div>
         </div>
 
         <div id="popup" class="popup">
-            <div class="popup-header">Heroes</div>
-            <textarea id="hero-copy" class="textarea-popup">Copy the your AFKCalc JSON Text here, or upload the file</textarea>
+            <div class="popup-header">AFKCalc Data Load</div>
+            <textarea id="hero-copy" class="textarea-popup">Copy your AFKCalc JSON Text here, or upload the file</textarea>
            
             <div class="grid-container-h2">
-                    <div id="load-data" class="button input-wrapper">
+                    <div id="load-data" class="button input-wrapper top5">
                        <div class="center-text">Load AFK Data as JSON</div>
                        <input class="input" type="file" id="myfile" name="myfile">
                    </div>
                     
-                <div id="load-data" class="button" onclick="parseJSON()">
+                <div id="load-data" class="button top5" onclick="parseJSON()">
                     <div class="center-text">Load Data</div>
                 </div>
             </div>         
             <div class="close" onclick="hideElement('#popup')"></div>
         </div>
-
         <div id="popup-hero" class="popup-hero">
             <div class="popup-header">Select Hero</div>
             <div class="popup-header grid-faction">
@@ -225,14 +239,9 @@
             </div>
             
         </div>
-
         <div id="popup-guide-p1" class="popup">
             <div class="popup-header">Select the number of Farm Heroes you are using?</div>
-
             <div id="button-guide-p1-1" class="popup-header button guide-button" onclick="openFarmHeroMenu(5)">5 Heroes = Duo + Trio</div>
-            <!-- <div id="button-guide-p1-2" class="popup-header button guide-button" onclick="openFarmHeroMenu(7)">7 Heroes = 2xDuo + Trio</div> -->
-            <!-- <div id="button-guide-p1-3" class="popup-header button guide-button" onclick="openFarmHeroMenu(8)">8 Heroes = Duo + 2xTrio</div> -->
-            <!-- <div id="button-guide-p1-4" class="popup-header button guide-button" onclick="openFarmHeroMenu(10)">10 Heroes = 2xDuo + 2xTrio</div> -->
             <div class="close" onclick="hideElement('#popup-guide-p1')"></div>
             
         </div>
