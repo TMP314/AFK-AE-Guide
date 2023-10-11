@@ -145,14 +145,17 @@ function clearAllData() {
 function addHeroToTeamSlot(teamSlot, heroId) {
     var type = teamSlot.substr(0,1)
     var farmtype = teamSlot.substr(0,2)
-    if (type != "b" && farmtype != "fb") {
-        var faction = allData["team"][selectedHeroeBeastDivId]["faction"]
-        faction = allData["heroes"][heroId]["faction"]
-        console.log(faction)
-    }
+    var faction
+    console.log("teamSlot: " + teamSlot)
+    console.log("heroId: " + heroId)
+    
     
     
     if ($("#" + teamSlot).attr("hero-beast-id") != undefined) {
+        if (type != "b" && farmtype != "fb") {
+            faction = allData["heroes"][heroId]["faction"]
+            console.log(faction)
+        }
         $("#" + selectedHeroeBeastDivId).empty()
         $("#" + selectedHeroeBeastDivId).css('opacity','50%');
         $("#" + selectedHeroeBeastDivId).removeAttr("hero-beast-id");
