@@ -13,6 +13,7 @@ body {
     text-align: center;
     -webkit-print-color-adjust:exact !important;
     print-color-adjust:exact !important;
+    user-select: none;
 }
 
 /*From https://codepen.io/flostrasser/pen/oNJGzdW */
@@ -374,6 +375,16 @@ input[type="radio"]:checked::before {
 .button:active{
     background-color: #59b386;
  }
+
+ 
+.button-clear:hover {
+    background-color: #5f9ea0;
+}
+
+.button-clear:active{
+    background-color: #59b386;
+ }
+
 
 .center-text {
     margin: auto;
