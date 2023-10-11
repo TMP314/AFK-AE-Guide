@@ -351,11 +351,20 @@ input[type="radio"]:checked::before {
     border-radius: 10px;
 }
 
-.button.clear {
+.button-clear {
     height: min(4vh, 20px);
     width: 100px;
     top: min(-0.35vh, -1px);
-    margin-left: 100px;
+    margin-left: 10px;
+    font-size: min(calc(0.8 * (3vh - 8px)), 1.0em);
+    background-color: #487f81;
+    color: white;
+    position: relative;
+    display: grid;
+    margin-right: auto;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-radius: 10px;
 }
 
 .button:hover {
