@@ -6,29 +6,47 @@ function createHeroDiv(heroId) {
     var factionDiv = document.createElement('div');
     var rankDiv = document.createElement('div');
     var heroIcon = "img" + allData["heroes"][heroId]["img"]
+    var selectedGuildMember = allData["selectedGuildMember"];
+    var amISelected;
+    var teamLoop;
+    if (selectedGuildMember == "My Heroes" || selectedGuildMember == allData["player"]) {
+        amISelected = true;
+    }
+    else {
+        amISelected = false;
+    }
+    
+    if (amISelected) {
+        teamLoop = allData["heroes"]
+    }
+    else {
+        teamLoop = allData["guild"][selectedGuildMember]["heroes"]
+    }
+
     // console.log("normal: " + heroIcon)
+    console.log(selectedGuildMember)
 
     var faction = "img/factions/" + allData["heroes"][heroId]["faction"] + ".png";
     var frame;
-    if (allData["heroes"][heroId]["ascend"] >= 7) {
+    if (teamLoop[heroId]["ascend"] >= 7) {
         frame = "ascend.png"
     }
-    else if (allData["heroes"][heroId]["ascend"] == 6) {
+    else if (teamLoop[heroId]["ascend"] == 6) {
         frame = "mythic-p.png"
     }
-    else if (allData["heroes"][heroId]["ascend"] == 5) {
+    else if (teamLoop[heroId]["ascend"] == 5) {
         frame = "mythic.png"
     }
-    else if (allData["heroes"][heroId]["ascend"] == 4) {
+    else if (teamLoop[heroId]["ascend"] == 4) {
         frame = "legendary-p.png"
     }
-    else if (allData["heroes"][heroId]["ascend"] == 3) {
+    else if (teamLoop[heroId]["ascend"] == 3) {
         frame = "legendary.png"
     }
-    else if (allData["heroes"][heroId]["ascend"] == 2) {
+    else if (teamLoop[heroId]["ascend"] == 2) {
         frame = "elite-p.png"
     }
-    else if (allData["heroes"][heroId]["ascend"] == 1) {
+    else if (teamLoop[heroId]["ascend"] == 1) {
         frame = "elite.png"
     }
     else {
@@ -36,7 +54,7 @@ function createHeroDiv(heroId) {
     }
     frame = "img/heroes-frame/" + frame;
 
-    var stars = allData["heroes"][heroId]["ascend"] - 7; 
+    var stars = teamLoop[heroId]["ascend"] - 7; 
     var prevStar = null;
 
     var starPositions = {
@@ -48,13 +66,13 @@ function createHeroDiv(heroId) {
     }
 
     var starType;
-    if (allData["heroes"][heroId]["engrave"] >= 80) {
+    if (teamLoop[heroId]["engrave"] >= 80) {
         starType = "80.png"
     }
-    else if (allData["heroes"][heroId]["engrave"] >= 60) {
+    else if (teamLoop[heroId]["engrave"] >= 60) {
         starType = "60.png"
     }
-    else if (allData["heroes"][heroId]["engrave"] >= 30) {
+    else if (teamLoop[heroId]["engrave"] >= 30) {
         starType = "30.png"
     }
     else {
@@ -65,28 +83,28 @@ function createHeroDiv(heroId) {
     var rank;
     var fi;
     var si;
-    if (allData["heroes"][heroId]["fi"] == 36) {
+    if (teamLoop[heroId]["fi"] == 36) {
         fi = "36"
     }
-    else if (allData["heroes"][heroId]["fi"] >= 9) {
+    else if (teamLoop[heroId]["fi"] >= 9) {
         fi = "9"
     }
-    else if (allData["heroes"][heroId]["fi"] >= 3) {
+    else if (teamLoop[heroId]["fi"] >= 3) {
         fi = "3"
     }
-    else if (allData["heroes"][heroId]["fi"] >= 0 || !allData["heroes"][heroId].hasOwnProperty("fi")) {
+    else if (teamLoop[heroId]["fi"] >= 0 || !teamLoop[heroId].hasOwnProperty("fi")) {
         fi = "0"
     }
-    if (allData["heroes"][heroId]["si"] >= 30) {
+    if (teamLoop[heroId]["si"] >= 30) {
         si = "30"
     }
-    else if (allData["heroes"][heroId]["si"] >= 20) {
+    else if (teamLoop[heroId]["si"] >= 20) {
         si = "20"
     }
-    else if (allData["heroes"][heroId]["si"] >= 10) {
+    else if (teamLoop[heroId]["si"] >= 10) {
         si = "10"
     }
-    else if (allData["heroes"][heroId]["si"] >= 0) {
+    else if (teamLoop[heroId]["si"] >= 0) {
         si = "0"
     }
     else {

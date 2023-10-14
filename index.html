@@ -5,6 +5,7 @@
         <title>AFK AE Tool</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="./css/dropdown.css">
         <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script> 
         <script src="./js/init.js"></script>
@@ -21,7 +22,16 @@
         </div>
 
         <div class="main">
-            <div class="sub-header">Input your teams, then generate the guide</div>
+            <div id="dropdown-guild-selector" class="dropdown">
+                <button onclick="dropDownToggle()" class="dropbtn">Select Guild Member</button>
+                <div id="myDropdown" class="dropdown-content">
+                  <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                  <a href="#about">My Heroes</a>
+                  <div id="guild-member-container"></div>
+                  
+                </div>
+            </div>
+            <div class="sub-header">Input teams, then generate guide</div>
             <div class="team-container">
                 <div class="grid-header">
                     Team 1
@@ -145,9 +155,13 @@
 
         <div class="footer">
             Version: 0.9
+            <div id="load-guild-data" class="button-clear" onclick="showElement('#popup-guild', 'grid')">
+                <div class="center-text">Load Guild Data</div>
+            </div>
             <div id="clear-all-data" class="button-clear" onclick="clearAllData()">
                 <div class="center-text">Clear All Data</div>
             </div>
+            
         </div>
 
         <div id="popup" class="popup">
@@ -160,11 +174,27 @@
                        <input class="input" type="file" id="myfile" name="myfile">
                    </div>
                     
-                <div id="load-data" class="button top5" onclick="parseJSON()">
+                <div id="load-data" class="button top5" onclick="parseJSON('hero')">
                     <div class="center-text">Load Data</div>
                 </div>
             </div>         
             <div class="close" onclick="hideElement('#popup')"></div>
+        </div>
+        <div id="popup-guild" class="popup">
+            <div class="popup-header">Guild Data Load</div>
+            <textarea id="guild-copy" class="textarea-popup">Copy your guilds AFKCalc JSON Text here, or upload the file</textarea>
+           
+            <div class="grid-container-h2">
+                    <div id="load-data-guild" class="button input-wrapper top5">
+                       <div class="center-text">Load Guild Data as JSON</div>
+                       <input class="input" type="file" id="myfile-guild" name="myfile">
+                   </div>
+                    
+                <div id="load-guild-data" class="button top5" onclick="parseJSON('guild')">
+                    <div class="center-text">Load Guild Data</div>
+                </div>
+            </div>         
+            <div class="close" onclick="hideElement('#popup-guild')"></div>
         </div>
         <div id="popup-hero" class="popup-hero">
             <div class="popup-header">Select Hero</div>

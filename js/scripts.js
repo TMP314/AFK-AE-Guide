@@ -22,8 +22,95 @@ function onStartup() {
             openSelectMenu(this.id);
         });
     });
+    window.addEventListener('click', function(e){   
+        if (document.getElementById('dropdown-guild-selector').contains(e.target)){
+            if(e.target.tagName.toLowerCase() === "a") {
+                console.log(e.target.innerHTML)
+                allData["selectedGuildMember"] = e.target.innerHTML
+                loadGuildMemberData(allData["selectedGuildMember"])
+            }
+        } else{
+            if ($("#myDropdown").hasClass("show")) {
+                dropDownToggle();
+            }
+          
+        }
+      });
+
     //Load data if it exists
     loadState();
+}   
+
+function loadGuildMemberData(name) {
+    console.log("Loading guild member data: " + name)
+    dropDownToggle();
+    clearTeams(true);
+    $("#popup-hero-grid").empty()
+    $("#popup-beast-grid").empty()
+    if (name == "My Heroes" || name == allData["player"]) {
+        for (h in allData["heroes"]) {
+            createHeroDiv(h)
+        }
+        for (h in allData["beasts"]) {
+            createBeastDiv(h)
+        }
+        for (t in allData["team"]) {
+            selectedHeroeBeastDivId = t
+            // console.log("Trying to add " + t)
+            addHeroToTeamSlot(t, allData["team"][t])
+        }
+    }
+    else {
+        for (h in allData["guild"][name]["heroes"]) {
+            createHeroDiv(h)
+        }
+        for (h in allData["guild"][name]["beasts"]) {
+            createBeastDiv(h)
+        }
+        for (t in allData["guild"][name]["team"]) {
+            selectedHeroeBeastDivId = t
+            // console.log("Trying to add " + t)
+            addHeroToTeamSlot(t, allData["guild"][name]["team"][t])
+        }
+    }
+    
+}
+
+function dropDownToggle() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        a[i].style.display = "";
+        } else {
+        a[i].style.display = "none";
+        }
+    }
+}
+
+function loadGuildMemberIntoDropDown(name) {
+    var div = document.createElement('a');
+    div.setAttribute('href', '#' + name)
+    div.innerHTML = name
+    $("#guild-member-container").append(div)
+}
+
+function loadAllGuildMembersIntoDropDown() {
+    var guildMember;
+    if (!loadedGuild) {
+        for (guildMember in allData["guild"]) {
+            loadGuildMemberIntoDropDown(guildMember)
+        }
+    }
+    loadedGuild = true;
 }
 
 function openSelectMenu(id) {
@@ -33,12 +120,30 @@ function openSelectMenu(id) {
     var teamHeroes = [];
     var farmHeroes = [];
     var heroFaction;
+    var selectedGuildMember = allData["selectedGuildMember"]
+    var amISelected;
+    var teamLoop;
+    if (selectedGuildMember == "My Heroes" || selectedGuildMember == allData["player"]) {
+        amISelected = true;
+    }
+    else {
+        amISelected = false;
+    }
+    
+    if (amISelected) {
+        teamLoop = allData["team"]
+    }
+    else {
+        teamLoop = allData["guild"][selectedGuildMember]["team"]
+    }
+
     selectedHeroeBeastDivId = id;
+    
     if (type == "h" || (type == "f" && !isFarmBeast)) {
         if (loadedHeroes) {
             //Show farm heroes in list
             if (type != "f") {
-                for (h in allData["team"]) {
+                for (h in teamLoop) {
                     if (h.substr(0,1) == "f" && h.substr(1,1) != "b") {
                         farmHeroes.push(searchHero)
                     }
@@ -59,8 +164,8 @@ function openSelectMenu(id) {
             }
             //Show team heroes in list
             else {
-                for (h in allData["team"]) {
-                    searchHero = allData["team"][h]
+                for (h in teamLoop) {
+                    searchHero = teamLoop[h]
                     if (h.substr(0,1) == "f" && h.substr(1,1) != "b") {
                         farmHeroes.push(searchHero)
                     }
@@ -96,8 +201,8 @@ function openSelectMenu(id) {
         if (loadedBeasts) {
             //Show farm beasts in list
             if (type != "f") {
-                for (h in allData["team"]) {
-                    searchHero = allData["team"][h]
+                for (h in teamLoop) {
+                    searchHero = teamLoop[h]
                     if (h.substr(0,1) == "f") {
                         farmHeroes.push(searchHero)
                     }
@@ -114,8 +219,8 @@ function openSelectMenu(id) {
             }
             //Show team beasts in list
             else {
-                for (h in allData["team"]) {
-                    searchHero = allData["team"][h]
+                for (h in teamLoop) {
+                    searchHero = teamLoop[h]
                     if (h.substr(0,1) == "f") {
                         farmHeroes.push(searchHero)
                     }
@@ -140,31 +245,53 @@ function openSelectMenu(id) {
 
 function clearAllData() {
     localStorage.removeItem("allData");
+    clearTeams();
 }
 
 function addHeroToTeamSlot(teamSlot, heroId) {
+    // console.log("Adding heroes to slots")
     var type = teamSlot.substr(0,1)
     var farmtype = teamSlot.substr(0,2)
-    var faction
-    console.log("teamSlot: " + teamSlot)
-    console.log("heroId: " + heroId)
-    
-    
-    
+    var faction;
+    var selectedGuildMember = allData["selectedGuildMember"]
+    var amISelected;
+    if (selectedGuildMember == "My Heroes" || selectedGuildMember == allData["player"]) {
+        amISelected = true;
+    }
+    else {
+        amISelected = false;
+    }
+    console.log(amISelected)
     if ($("#" + teamSlot).attr("hero-beast-id") != undefined) {
         if (type != "b" && farmtype != "fb") {
-            faction = allData["heroes"][heroId]["faction"]
-            console.log(faction)
+            if (amISelected) {
+                faction = allData["heroes"][heroId]["faction"]
+            }
+            else {
+                faction = allData["guild"][selectedGuildMember]["heroes"][heroId]["faction"]
+            }
+            // console.log(faction)
         }
         $("#" + selectedHeroeBeastDivId).empty()
         $("#" + selectedHeroeBeastDivId).css('opacity','50%');
         $("#" + selectedHeroeBeastDivId).removeAttr("hero-beast-id");
         $("#" + selectedHeroeBeastDivId).removeAttr("style");
         if (selectedFactions["faction-" + faction]) {
-            addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
+            if (amISelected) {
+                addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
+            }
+            else {
+                addHeroBeastToSelection(allData["guild"][selectedGuildMember]["team"][selectedHeroeBeastDivId]);
+            }
+            
         }
         // addHeroBeastToSelection( ][selectedHeroeBeastDivId]);
-        delete allData["team"][selectedHeroeBeastDivId];
+        if (amISelected) {
+            delete allData["team"][selectedHeroeBeastDivId];
+        }
+        else {
+            delete allData["guild"][selectedGuildMember]["team"][selectedHeroeBeastDivId];
+        }
     }
 
     $("#" + teamSlot).css('background-image','none');
@@ -185,12 +312,17 @@ function addHeroToTeamSlot(teamSlot, heroId) {
     }
     removeHeroBeastFromSelection(heroId);
     
-    allData["team"][teamSlot] = heroId;
+    if (amISelected) {
+        allData["team"][teamSlot] = heroId;
+    }
+    else {
+        allData["guild"][selectedGuildMember]["team"][teamSlot] = heroId;
+    }
     saveCurrentState();
     selectedHeroeBeastDivId = null;
 }
 
-function clearHero() {
+function clearHero(swap) {
     var faction = allData["team"][selectedHeroeBeastDivId]["faction"]
     $("#" + selectedHeroeBeastDivId).empty()
     $("#" + selectedHeroeBeastDivId).css('opacity','50%');
@@ -207,7 +339,10 @@ function clearHero() {
         addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
     }
     // addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
-    delete allData["team"][selectedHeroeBeastDivId];
+    if (!swap) {
+        delete allData["team"][selectedHeroeBeastDivId];
+    }
+    
     saveCurrentState();
     selectedHeroeBeastDivId = null;
 }
@@ -222,20 +357,25 @@ function removeHeroBeastFromSelection(divId) {
     $("#" + divId).css('display','none');
 }
 
-function clearTeams() {
+function clearTeams(swap) {
     var attr;
     $('.hero').each(function() {
         attr = $(this).attr('hero-beast-id')
         if (typeof attr !== 'undefined' && attr !== false) {
             selectedHeroeBeastDivId = $(this).attr('id')
-            clearHero();
+            if (selectedHeroeBeastDivId.substr(0,5) != "guide") {
+                clearHero(swap);
+            }
+            
         }      
     });
     $('.beast').each(function() {
         attr = $(this).attr('hero-beast-id')
         if (typeof attr !== 'undefined' && attr !== false) {
             selectedHeroeBeastDivId = $(this).attr('id')
-            clearHero();
+            if (selectedHeroeBeastDivId.substr(0,5) != "guide") {
+                clearHero(swap);
+            }
         }      
     });
     clearGuide()
@@ -301,6 +441,7 @@ function loadState() {
     try {
         if (localStorage.getItem('allData') != "null" && localStorage["allData"] != undefined) {
             allData = JSON.parse(localStorage.getItem('allData'));
+            allData["selectedGuildMember"] = "My Heroes"
             loadedHeroes = true;
             loadedBeasts = true;
             for (h in allData["heroes"]) {
@@ -311,12 +452,16 @@ function loadState() {
             }
             for (t in allData["team"]) {
                 selectedHeroeBeastDivId = t
-                console.log("Trying to add " + t)
+                // console.log("Trying to add " + t)
                 addHeroToTeamSlot(t, allData["team"][t])
             }
-            $("#sod").prop("checked", allData["sod"])
-            enableDisableTeam6()
-        }   
+            // $("#sod").prop("checked", allData["sod"])
+            // enableDisableTeam6()
+            for (g in allData["guild"]){
+                loadGuildMemberIntoDropDown(g);
+            }
+        }
+        
     }
     catch {
         console.log("Couldn't load pre-saved allData")
@@ -344,17 +489,36 @@ var getObjectByValue = function (array, key, value) {
 
 function selectFaction(faction) {
     var showHero = true;
+    var selectedGuildMember = allData["selectedGuildMember"];
+    var amISelected;
+    var heroLoop;
+    var teamLoop;
+    if (selectedGuildMember == "My Heroes" || selectedGuildMember == allData["player"]) {
+        amISelected = true;
+    }
+    else {
+        amISelected = false;
+    }
+    
+    if (amISelected) {
+        heroLoop = allData["heroes"]
+        teamLoop = allData["team"]
+    }
+    else {
+        heroLoop = allData["guild"][selectedGuildMember]["heroes"]
+        teamLoop = allData["guild"][selectedGuildMember]["team"]
+    }
     selectedFactions[faction] = !selectedFactions[faction];
     if (selectedFactions[faction]) {
         $("#" + faction).removeClass("unselected")
         $("#" + faction).addClass("selected")
-        for (i in allData["heroes"]) { 
+        for (i in heroLoop) { 
             
-            if ( "faction-" + allData["heroes"][i]["faction"] == faction) {
+            if ( "faction-" + heroLoop[i]["faction"] == faction) {
                 showHero = true;
                 if (selectedHeroeBeastDivId.substr(0,1) == "f") {
-                    for (h in allData["team"]) {
-                        if (i == allData["team"][h] && h.substr(0,1) == "f") {
+                    for (h in teamLoop) {
+                        if (i == teamLoop[h] && h.substr(0,1) == "f") {
                             // console.log("Hero " + i + " exists in team at slot " + h)
                             showHero = false;
                         }
@@ -364,8 +528,8 @@ function selectFaction(faction) {
                     }
                 }
                 if (selectedHeroeBeastDivId.substr(0,1) == "h" || selectedHeroeBeastDivId.substr(0,1) == "g" ) {
-                    for (h in allData["team"]) {
-                        if (i == allData["team"][h] && h.substr(0,1) == "h") {
+                    for (h in teamLoop) {
+                        if (i == teamLoop[h] && h.substr(0,1) == "h") {
                             // console.log("Hero " + i + " exists in team at slot " + h)
                             showHero = false;
                         }
@@ -382,8 +546,8 @@ function selectFaction(faction) {
     else {
         $("#" + faction).addClass("unselected")
         $("#" + faction).removeClass("selected")
-        for (i in allData["heroes"]) {
-            if ( "faction-" + allData["heroes"][i]["faction"] == faction) {
+        for (i in heroLoop) {
+            if ( "faction-" + heroLoop[i]["faction"] == faction) {
                 removeHeroBeastFromSelection(i)
             }
         }
@@ -393,7 +557,24 @@ function selectFaction(faction) {
 function isValidTeam() {
     var beastCount = 0;
     var heroCount = 0;
-    for (i in allData["team"]) {
+    var selectedGuildMember = allData["selectedGuildMember"];
+    var amISelected;
+    var heroLoop;
+    var teamLoop;
+    if (selectedGuildMember == "My Heroes" || selectedGuildMember == allData["player"]) {
+        amISelected = true;
+    }
+    else {
+        amISelected = false;
+    }
+    
+    if (amISelected) {
+        teamLoop = allData["team"]
+    }
+    else {
+        teamLoop = allData["guild"][selectedGuildMember]["team"]
+    }
+    for (i in teamLoop) {
         if (i.substr(0,1) == "b") {
             beastCount++
         }
@@ -459,12 +640,31 @@ function setGuideData() {
     var currentCell;
     var canAddFarmhero = true;
     var canAddFarmBeast = true;
+    var selectedGuildMember = allData["selectedGuildMember"];
+    var amISelected;
+    var guideLoop;
+    var teamLoop;
+    if (selectedGuildMember == "My Heroes" || selectedGuildMember == allData["player"]) {
+        amISelected = true;
+    }
+    else {
+        amISelected = false;
+    }
+    
+    if (amISelected) {
+        teamLoop = allData["team"]
+        guideLoop = allData["guide"]
+    }
+    else {
+        teamLoop = allData["guild"][selectedGuildMember]["team"]
+        guideLoop = allData["guild"][selectedGuildMember]["guide"]
+    }
     clearGuide()
     for (i in mappingForGuide) {
-        allData["guide"][i] = mappingForGuide[i]
+        guideLoop[i] = mappingForGuide[i]
     }
 
-    for (slot in allData["guide"]) {
+    for (slot in guideLoop) {
         guideLength = slot.length
         // console.log("Length: " + guideLength)
         if (slot.substr(1,1) != "b") {
@@ -485,15 +685,15 @@ function setGuideData() {
         canAddFarmBeast = true;
         if (slot.substr(1,1) != "b") {
             //Check if the current hero to be placed is a farm hero, and if so, does it exist anywhere in the current phase
-            if (allData["guide"][slot].substr(0,1) == "f") {
+            if (guideLoop[slot].substr(0,1) == "f") {
                 for (phaseRow in guidePhases[phase]) {
                     for (let cell=0;cell<5;cell++) {
                         currentCell = "g" + guidePhases[phase][phaseRow] + cell
                         // console.log("Phaserow: " + guidePhases[phase][phaseRow])
                         // console.log("Checking for slot: " + slot + " against guide slot: " + currentCell)
-                        // console.log("For hero: " + allData["team"][allData["guide"][slot]] + " against guide hero: " + allData["team"][allData["guide"][currentCell]])
-                        if ((allData["team"][allData["guide"][slot]] == allData["team"][allData["guide"][currentCell]]) && allData["guide"][currentCell].substr(0,1) != "f") {
-                            console.log("Current farm hero: " + allData["guide"][slot])
+                        // console.log("For hero: " + allData["team"][guideLoop[slot]] + " against guide hero: " + allData["team"][guideLoop[currentCell]])
+                        if ((teamLoop[guideLoop[slot]] == teamLoop[teamLoop[currentCell]]) && teamLoop[currentCell].substr(0,1) != "f") {
+                            console.log("Current farm hero: " + teamLoop[slot])
                             console.log("is being used/to be used at: " + currentCell)
                             console.log("will not be adding this farm hero, and instead will keep it blank.")
                             canAddFarmhero = false;
@@ -505,7 +705,7 @@ function setGuideData() {
 
             if (canAddFarmhero) {
                 //Clone the selected hero, and update it's id
-                $("#" + allData["guide"][slot]).clone().prependTo($("#" + slot));
+                $("#" + guideLoop[slot]).clone().prependTo($("#" + slot));
                 $("#" + slot).children("div").attr("id", "guide-" + slot)
                 $("#" + "guide-" + slot).css("display", "block");
                 $("#" + "guide-" + slot).attr("class", "hero");
@@ -519,14 +719,14 @@ function setGuideData() {
             
         }
         else {
-            if (allData["guide"][slot].substr(0,1) == "f") {
+            if (guideLoop[slot].substr(0,1) == "f") {
                 for (phaseRow in guidePhases[phase]) {
                     currentCell = "gb" + guidePhases[phase][phaseRow]
                     // console.log("Phaserow: " + guidePhases[phase][phaseRow])
                     // console.log("Checking for slot: " + slot + " against guide slot: " + currentCell)
-                    // console.log("For hero: " + allData["team"][allData["guide"][slot]] + " against guide hero: " + allData["team"][allData["guide"][currentCell]])
-                    if ((allData["team"][allData["guide"][slot]] == allData["team"][allData["guide"][currentCell]]) && allData["guide"][currentCell].substr(0,1) != "f") {
-                        console.log("Current farm hero: " + allData["guide"][slot])
+                    // console.log("For hero: " + teamLoop[teamLoop[slot]] + " against guide hero: " + teamLoop[teamLoop[currentCell]])
+                    if ((teamLoop[guideLoop[slot]] == teamLoop[guideLoop[currentCell]]) && guideLoop[currentCell].substr(0,1) != "f") {
+                        console.log("Current farm hero: " + teamLoop[slot])
                         console.log("is being used/to be used at: " + currentCell)
                         console.log("will not be adding this farm hero, and instead will keep it blank.")
                         canAddFarmBeast = false;
@@ -536,7 +736,7 @@ function setGuideData() {
 
             if (canAddFarmBeast) {
                 //Clone the selected beast, and update it's id
-                $("#" + allData["guide"][slot]).clone().prependTo($("#" + slot));
+                $("#" + guideLoop[slot]).clone().prependTo($("#" + slot));
                 $("#" + slot).children("div").attr("id", "guide-" + slot)
                 $("#" + "guide-" + slot).css("display", "block");
                 $("#" + "guide-" + slot).attr("class", "beast");
@@ -553,5 +753,3 @@ function setGuideData() {
 }
 
 onStartup();
-
- 

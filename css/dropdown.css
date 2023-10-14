@@ -1,0 +1,67 @@
+/* Dropdown Button */
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    font-size: min(13px, 3vw);
+    border: none;
+    cursor: pointer;
+    
+  }
+  
+  /* Dropdown button on hover & focus */
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+  }
+  
+  /* The search field */
+  #myInput {
+    background-image: url('searchicon.png');
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding-left: 20px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* The search field when it gets focus/clicked on */
+  #myInput:focus {outline: none;}
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    display: flex;
+    height: 25px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    border: 1px solid #ddd;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    background-color: white;
+    color: black;
+    padding: 8px;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #f1f1f1}
+  
+  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  .show {display:block;}
+
+  #guild-member-container {
+    height: 40vh;
+    overflow-y: auto;
+  }

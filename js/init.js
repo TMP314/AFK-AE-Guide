@@ -3,6 +3,7 @@ var allData = {
     "beasts": {},
     "team": {},
     "guide": {},
+    "guild": {},
     "numberOfFarmHeroes": 0,
     "player": "",
     "sod": false
@@ -10,3 +11,4 @@ var allData = {
 
 var loadedHeroes = false;
 var loadedBeasts = false;
+var loadedGuild = false;

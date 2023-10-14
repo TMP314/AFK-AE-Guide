@@ -1428,5 +1428,35 @@ var heroesArray = [
     "slug": "lucilla",
     "faction": "hypogeans",
     "isAwakened": false
+  },
+  {
+    "id": 145,
+    "type": "agility",
+    "class": "ranger",
+    "role": "continuous",
+    "image": "/heroes/AstroPOM.jpg",
+    "slug": "astropom",
+    "faction": "wilders",
+    "isAwakened": true
+  },
+  {
+    "id": 146,
+    "type": "strength",
+    "class": "warrior",
+    "role": "buffer",
+    "image": "/heroes/Admiral.jpg",
+    "slug": "admiral",
+    "faction": "lightbearers",
+    "isAwakened": false
+  },
+  {
+    "id": 147,
+    "type": "agility",
+    "class": "ranger",
+    "role": "debuffer",
+    "image": "/heroes/Robin.jpg",
+    "slug": "robin",
+    "faction": "dimensionals",
+    "isAwakened": false
   }
 ]

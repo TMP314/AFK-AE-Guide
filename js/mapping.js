@@ -93,6 +93,21 @@ var mappingForGuide = {
     "gb17": "b30"
 }
 
+var ascensionLevels = {
+    "ascend-5": 12,
+    "ascend-4": 11,
+    "ascend-3": 10,
+    "ascend-2": 9,
+    "ascend-1": 8,
+    "ascend": 7,
+    "mythic-p": 6,
+    "mythic": 5,
+    "legendary-p": 4,
+    "legendary": 3,
+    "elite-p": 2,
+    "elite": 1
+}
+
 var guidePhases = {
     "p0": [0,1],
     "p1": [2,3],

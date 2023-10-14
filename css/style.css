@@ -100,7 +100,7 @@ label {
 }
 
 .main {
-    height: min(66vh, 740px);
+    height: min(76vh);
     overflow-y: auto;
 }
 
@@ -240,7 +240,7 @@ label {
 
 .generate-container {
     padding-top: 5px;
-    height: min(21vh, 135px);
+    height: min(10vh);
 }
 
 .grid-container-h1 {
@@ -350,11 +350,12 @@ input[type="radio"]:checked::before {
     margin-top: 2px;
     margin-bottom: 2px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .button-clear {
     height: min(4vh, 20px);
-    width: 100px;
+    width: min(100px, 20vw);
     top: min(-0.35vh, -1px);
     margin-left: 10px;
     font-size: min(calc(0.8 * (3vh - 8px)), 1.0em);
@@ -366,6 +367,7 @@ input[type="radio"]:checked::before {
     margin-top: 2px;
     margin-bottom: 2px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .button:hover {
