@@ -71,11 +71,11 @@ function parseJSON(type) {
                 guildData = JSON.parse(heroCopy);
                 loadGuildData(guildData)
             }
-            
+
             saveCurrentState()
         }
         catch {
-            window.alert("Please load valid guild data into the text box");
+            window.alert("Please load valid data into the text box");
         }
     }
 
@@ -108,7 +108,10 @@ function loadUserData(userData) {
         // console.log("Creating beast: " + b)
         id = beastsArray[b]["id"];
         rarity = beastsArray[b]["elevation"];
-        level = userData[3]["pets"][id]["strengthBuff"] + userData[3]["pets"][id]["intelligenceBuff"] + userData[3]["pets"][id]["agilityBuff"];
+        level = 0;
+        if (userData[3]["pets"].hasOwnProperty(id)) {
+            level = userData[3]["pets"][id]["strengthBuff"] + userData[3]["pets"][id]["intelligenceBuff"] + userData[3]["pets"][id]["agilityBuff"];
+        }
         allData["beasts"][id] = {"rarity": rarity, "level": level};
         createBeastDiv(id)
     }    
