@@ -44,7 +44,12 @@ function onStartup() {
 function loadGuildMemberData(name) {
     console.log("Loading guild member data: " + name)
     dropDownToggle();
-    clearTeams(true);
+    if (name == "My Heroes" || name == allData["player"]) {
+        if (Object.keys(allData["team"]).length !== 0) {
+            clearTeams(true);
+        }
+    }
+    
     $("#popup-hero-grid").empty()
     $("#popup-beast-grid").empty()
     if (name == "My Heroes" || name == allData["player"]) {
