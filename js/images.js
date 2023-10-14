@@ -168,11 +168,27 @@ function createBeastDiv(beastId) {
     var beastDiv = document.createElement('div');
     var frameDiv = document.createElement('div');
     var beastIcon;
+    var selectedGuildMember = allData["selectedGuildMember"];
+    var amISelected;
+    var beastLoop;
+    if (selectedGuildMember == "My Heroes" || selectedGuildMember == allData["player"]) {
+        amISelected = true;
+    }
+    else {
+        amISelected = false;
+    }
+    
+    if (amISelected) {
+        beastLoop = allData["beasts"]
+    }
+    else {
+        beastLoop = allData["guild"][selectedGuildMember]["beasts"]
+    }
 
-    if (allData["beasts"][beastId]["level"] >= 18 && allData["beasts"][beastId]["rarity"] == "elite") {
+    if (beastLoop[beastId]["level"] >= 18 && beastLoop[beastId]["rarity"] == "elite") {
         beastIcon = "img/beasts/pet_" + beastId + ".png"
     }
-    else if (allData["beasts"][beastId]["level"] < 18 && allData["beasts"][beastId]["rarity"] == "elite") {
+    else if (beastLoop[beastId]["level"] < 18 && beastLoop[beastId]["rarity"] == "elite") {
         beastIcon = "img/beasts/pet_" + beastId + "_basic.png"
     }
     else {
@@ -180,7 +196,7 @@ function createBeastDiv(beastId) {
     }
 
     var frame;
-    if (allData["beasts"][beastId]["rarity"] == "elite") {
+    if (beastLoop[beastId]["rarity"] == "elite") {
         frame = "img/beasts-frame/frame-elite.png"
     }
     else  {
