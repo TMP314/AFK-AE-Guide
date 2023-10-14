@@ -136,6 +136,11 @@ function loadGuildData(guildData) {
     var ascend;
     var img;
     var awakened;
+
+    var heroNumberMapping = {};
+    for (h in heroesArray) {
+        heroNumberMapping[heroesArray[h]["slug"]] = heroesArray[h]["image"]
+    }
     for (var playerInArray in guildData) {
         name = guildData[playerInArray]["name"];
         allData["guild"][name] = {
@@ -155,7 +160,7 @@ function loadGuildData(guildData) {
                 code = getKeyByValue(heroesName, heroName)
             }
             console.log(code)
-            img = allData["heroes"][code]["img"]
+            img = heroNumberMapping[code]
             furniture = guildData[playerInArray]["heroes"][heroInArray]["furniture"]["mythicCount"]
             signature = guildData[playerInArray]["heroes"][heroInArray]["signature"]["level"]
             engrave = guildData[playerInArray]["heroes"][heroInArray]["engrave"]["level"]
