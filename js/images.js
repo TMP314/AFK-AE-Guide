@@ -9,6 +9,7 @@ function createHeroDiv(heroId) {
     var selectedGuildMember = allData["selectedGuildMember"];
     var amISelected;
     var teamLoop;
+    var faction;
     if (selectedGuildMember == "My Heroes" || selectedGuildMember == allData["player"]) {
         amISelected = true;
     }
@@ -19,16 +20,19 @@ function createHeroDiv(heroId) {
     if (amISelected) {
         teamLoop = allData["heroes"]
         heroIcon = "img" + allData["heroes"][heroId]["img"]
+        faction = "img/factions/" + allData["heroes"][heroId]["faction"] + ".png";
     }
     else {
         teamLoop = allData["guild"][selectedGuildMember]["heroes"]
         heroIcon = "img" + allData["guild"][selectedGuildMember]["heroes"][heroId]["img"]
+        faction = "img/factions/" + allData["heroes"][heroId]["faction"] + ".png";
     }
+
 
     // console.log("normal: " + heroIcon)
     console.log(selectedGuildMember)
 
-    var faction = "img/factions/" + allData["heroes"][heroId]["faction"] + ".png";
+     
     var frame;
     if (teamLoop[heroId]["ascend"] >= 7) {
         frame = "ascend.png"
