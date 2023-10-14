@@ -25,7 +25,7 @@ function createHeroDiv(heroId) {
     else {
         teamLoop = allData["guild"][selectedGuildMember]["heroes"]
         heroIcon = "img" + allData["guild"][selectedGuildMember]["heroes"][heroId]["img"]
-        faction = "img/factions/" + allData["heroes"][heroId]["faction"] + ".png";
+        faction = "img/factions/" + allData["guild"][selectedGuildMember]["heroes"][heroId]["faction"] + ".png";
     }
 
 

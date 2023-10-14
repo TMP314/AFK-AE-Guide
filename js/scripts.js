@@ -245,7 +245,9 @@ function openSelectMenu(id) {
 
 function clearAllData() {
     localStorage.removeItem("allData");
-    clearTeams();
+    if (Object.keys(allData["team"]).length !== 0) {
+        clearTeams();
+    }
 }
 
 function addHeroToTeamSlot(teamSlot, heroId) {
