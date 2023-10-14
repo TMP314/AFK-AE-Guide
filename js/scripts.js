@@ -145,7 +145,7 @@ function openSelectMenu(id) {
     selectedHeroeBeastDivId = id;
     
     if (type == "h" || (type == "f" && !isFarmBeast)) {
-        if (loadedHeroes) {
+        if (loadedHeroes || !amISelected) {
             //Show farm heroes in list
             if (type != "f") {
                 for (h in teamLoop) {

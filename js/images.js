@@ -16,6 +16,9 @@ function createHeroDiv(heroId) {
     else {
         amISelected = false;
     }
+    if ($("#popup").css("display") == "grid") {
+        amISelected = true;
+    }
     
     if (amISelected) {
         teamLoop = allData["heroes"]
