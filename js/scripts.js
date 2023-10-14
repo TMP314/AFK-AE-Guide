@@ -44,11 +44,11 @@ function onStartup() {
 function loadGuildMemberData(name) {
     console.log("Loading guild member data: " + name)
     dropDownToggle();
-    if (name == "My Heroes" || name == allData["player"]) {
-        if (Object.keys(allData["team"]).length !== 0) {
+    // if (name == "My Heroes" || name == allData["player"]) {
+        // if (Object.keys(allData["team"]).length !== 0) {
             clearTeams(true);
-        }
-    }
+        // }
+    // }
     
     $("#popup-hero-grid").empty()
     $("#popup-beast-grid").empty()
@@ -330,7 +330,9 @@ function addHeroToTeamSlot(teamSlot, heroId) {
 }
 
 function clearHero(swap) {
-    var faction = allData["team"][selectedHeroeBeastDivId]["faction"]
+    var faction;
+    
+    
     $("#" + selectedHeroeBeastDivId).empty()
     $("#" + selectedHeroeBeastDivId).css('opacity','50%');
     $("#" + selectedHeroeBeastDivId).removeAttr("hero-beast-id");
@@ -342,8 +344,11 @@ function clearHero(swap) {
         hideElement("#popup-beast");
     }
     
-    if (selectedFactions["faction-" + faction]) {
-        addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
+    if (Object.keys(allData["team"]).length !== 0) {
+        faction = allData["team"][selectedHeroeBeastDivId]["faction"]
+        if (selectedFactions["faction-" + faction]) {
+            addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
+        }
     }
     // addHeroBeastToSelection(allData["team"][selectedHeroeBeastDivId]);
     if (!swap) {
