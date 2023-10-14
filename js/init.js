@@ -6,7 +6,8 @@ var allData = {
     "guild": {},
     "numberOfFarmHeroes": 0,
     "player": "",
-    "sod": false
+    "sod": false,
+    "selectedGuildMember": "My Heroes"
 }
 
 var loadedHeroes = false;

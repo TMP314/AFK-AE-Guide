@@ -77,7 +77,7 @@ function parseJSON(type) {
         catch {
             window.alert("Please load valid data into the text box");
         }
-        loadUserData()
+        loadUserData(userData)
     }
 
 }
