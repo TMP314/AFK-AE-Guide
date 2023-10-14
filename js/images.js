@@ -5,7 +5,7 @@ function createHeroDiv(heroId) {
     var starBGDiv = document.createElement('div');
     var factionDiv = document.createElement('div');
     var rankDiv = document.createElement('div');
-    var heroIcon = "img" + allData["heroes"][heroId]["img"]
+    var heroIcon;
     var selectedGuildMember = allData["selectedGuildMember"];
     var amISelected;
     var teamLoop;
@@ -18,9 +18,11 @@ function createHeroDiv(heroId) {
     
     if (amISelected) {
         teamLoop = allData["heroes"]
+        heroIcon = "img" + allData["heroes"][heroId]["img"]
     }
     else {
         teamLoop = allData["guild"][selectedGuildMember]["heroes"]
+        heroIcon = "img" + allData["guild"][selectedGuildMember]["heroes"][heroId]["img"]
     }
 
     // console.log("normal: " + heroIcon)
