@@ -1458,5 +1458,65 @@ var heroesArray = [
     "slug": "robin",
     "faction": "dimensionals",
     "isAwakened": false
+  },
+  {
+    "id": 148,
+    "type": "intelligence",
+    "class": "tank",
+    "role": "tank",
+    "image": "/heroes/Calypso.jpg",
+    "slug": "calypso",
+    "faction": "graveborns",
+    "isAwakened": true
+  },
+  {
+    "id": 149,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "control",
+    "image": "/heroes/Ringer.jpg",
+    "slug": "ringer",
+    "faction": "graveborns",
+    "isAwakened": false
+  },
+  {
+    "id": 150,
+    "type": "intelligence",
+    "class": "support",
+    "role": "buffer",
+    "image": "/heroes/BassD.jpg",
+    "slug": "bassd",
+    "faction": "hypogeans",
+    "isAwakened": false
+  },
+  {
+    "id": 151,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/TopMaster.jpg",
+    "slug": "topmaster",
+    "faction": "maulers",
+    "isAwakened": false
+  },
+  {
+    "id": 152,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "continuous",
+    "image": "/heroes/Ruler.jpg",
+    "slug": "ruler",
+    "faction": "celestials",
+    "isAwakened": true
+  },
+  {
+    "id": 153,
+    "type": "intelligence",
+    "class": "mage",
+    "role": "aoe",
+    "image": "/heroes/Disorder.jpg",
+    "slug": "disorder",
+    "faction": "hypogeans",
+    "isAwakened": true
   }
 ]

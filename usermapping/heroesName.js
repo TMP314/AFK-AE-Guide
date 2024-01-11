@@ -143,19 +143,12 @@ var heroesName = {
 	"liberta": "Liberta",
 	"lucilla": "Lucilla",
 	"astropom": "Lyca",
-	"admiral": "Jerome"
-}
-
-var awakanedName = {
-	"astropom": "Lyca",
-	"sq": "Safiya",
-	"divineblade": "Athalia",
-	"bsparrow": "Maetria",
-	"hfp": "Belinda",
-	"sbd": "Baden",
-	"wnt": "Solise",
-	"slk": "Brutus",
-	"windsm": "Thane",
-	"sbane": "Ezizh",
-	"sphoenix": "Talene"
+	"admiral": "Jerome",
+	"robin": "Robin Hood",
+	"calypso": "Shemira",
+	"ringer": "Lady Simona",
+	"bassd": "Lavatune",
+	"topmaster": "Vika",
+	"ruler": "Gavus",
+	"disorder": "Eugene"
 }
