@@ -152,3 +152,20 @@ var heroesName = {
 	"ruler": "Gavus",
 	"disorder": "Eugene"
 }
+
+var awakanedName = {
+	"astropom": "Lyca",
+	"sq": "Safiya",
+	"divineblade": "Athalia",
+	"bsparrow": "Maetria",
+	"hfp": "Belinda",
+	"sbd": "Baden",
+	"wnt": "Solise",
+	"slk": "Brutus",
+	"windsm": "Thane",
+	"sbane": "Ezizh",
+	"sphoenix": "Talene",
+	"ruler": "Gavus",
+	"disorder": "Eugene",
+	"calypso": "Shemira"
+}
