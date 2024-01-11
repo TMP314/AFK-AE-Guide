@@ -143,5 +143,12 @@ var heroesName = {
 	"liberta": "Liberta",
 	"lucilla": "Lucilla",
 	"astropom": "Lyca",
-	"admiral": "Jerome"
+	"admiral": "Jerome",
+	"robin": "Robin Hood",
+	"calypso": "Shemira",
+	"ringer": "Lady Simona",
+	"bassd": "Lavatune",
+	"topmaster": "Vika",
+	"ruler": "Gavus",
+	"disorder": "Eugene"
 }
